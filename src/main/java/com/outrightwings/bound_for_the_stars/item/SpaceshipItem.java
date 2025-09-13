@@ -60,6 +60,7 @@ public class SpaceshipItem extends Item {
                 float yaw = placer.getYRot() + 180.0F;
                 ship.setYRot(yaw);
                 ship.setYBodyRot(yaw);
+                ship.setYHeadRot(yaw);
             }
             if (!ctx.getPlayer().getAbilities().instabuild) {
                 stack.shrink(1);

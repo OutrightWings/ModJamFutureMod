@@ -12,12 +12,12 @@
 			},
 			"bones": [
 				{
-					"name": "Spaceship",
+					"name": "body",
 					"pivot": [0, 0, 0]
 				},
 				{
 					"name": "Nose",
-					"parent": "Spaceship",
+					"parent": "body",
 					"pivot": [0, 56, 0],
 					"cubes": [
 						{
@@ -63,7 +63,7 @@
 				},
 				{
 					"name": "Main",
-					"parent": "Spaceship",
+					"parent": "body",
 					"pivot": [0, 11, 0],
 					"cubes": [
 						{
@@ -188,7 +188,7 @@
 				},
 				{
 					"name": "SideL",
-					"parent": "Spaceship",
+					"parent": "body",
 					"pivot": [17, 20, 0],
 					"cubes": [
 						{
@@ -270,7 +270,7 @@
 				},
 				{
 					"name": "SideR",
-					"parent": "Spaceship",
+					"parent": "body",
 					"pivot": [-17, 20, 0],
 					"cubes": [
 						{
@@ -352,7 +352,7 @@
 				},
 				{
 					"name": "SupportBL",
-					"parent": "Spaceship",
+					"parent": "body",
 					"pivot": [7, 11, 7],
 					"cubes": [
 						{
@@ -384,7 +384,7 @@
 				},
 				{
 					"name": "SupportFL",
-					"parent": "Spaceship",
+					"parent": "body",
 					"pivot": [7, 11, -7],
 					"cubes": [
 						{
@@ -416,7 +416,7 @@
 				},
 				{
 					"name": "SupportFR",
-					"parent": "Spaceship",
+					"parent": "body",
 					"pivot": [-7.5, 11, -7.5],
 					"rotation": [0, 90, 0],
 					"cubes": [
@@ -449,7 +449,7 @@
 				},
 				{
 					"name": "SupportBR",
-					"parent": "Spaceship",
+					"parent": "body",
 					"pivot": [-7, 11, 7],
 					"cubes": [
 						{
@@ -481,7 +481,7 @@
 				},
 				{
 					"name": "Thruster",
-					"parent": "Spaceship",
+					"parent": "body",
 					"pivot": [0, 11, 0],
 					"cubes": [
 						{
