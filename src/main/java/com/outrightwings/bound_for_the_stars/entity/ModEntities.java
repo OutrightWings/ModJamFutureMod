@@ -16,7 +16,8 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<Spaceship>> SPACESHIP_ENTITY = ENTITY_TYPES.register("spaceship",()->
             EntityType.Builder.of(Spaceship::new, MobCategory.MISC)
-                    .sized(1,1)
+                    .sized(1.75f,3.625f) //28px wide 58px tall
+                    .fireImmune()
                     .build(new ResourceLocation(MODID, "spaceship").toString())
             );
 }
