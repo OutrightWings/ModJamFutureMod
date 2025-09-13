@@ -85,19 +85,19 @@ public class Spaceship extends Entity implements GeoEntity {
         this.entityData.set(DATA_ID_DAMAGE, p_38312_);
     }
     public float getDamage() {
-        return (Float)this.entityData.get(DATA_ID_DAMAGE);
+        return this.entityData.get(DATA_ID_DAMAGE);
     }
     public void setHurtTime(int p_38355_) {
         this.entityData.set(DATA_ID_HURT, p_38355_);
     }
     public int getHurtTime() {
-        return (Integer)this.entityData.get(DATA_ID_HURT);
+        return this.entityData.get(DATA_ID_HURT);
     }
     public void setHurtDir(int p_38363_) {
         this.entityData.set(DATA_ID_HURTDIR, p_38363_);
     }
     public int getHurtDir() {
-        return (Integer)this.entityData.get(DATA_ID_HURTDIR);
+        return this.entityData.get(DATA_ID_HURTDIR);
     }
     protected void destroy(DamageSource damageSource) {
         this.spawnAtLocation(ModItems.SPACESHIP_ITEM.get());
