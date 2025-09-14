@@ -37,39 +37,57 @@ public class SpaceshipItem extends Item {
         Direction face = ctx.getClickedFace();
         var clickedState = level.getBlockState(clicked);
 
-        // Determine final spawn position
+        // Determine final spawn position (same logic you had)
         BlockPos placePos = clickedState.getCollisionShape(level, clicked).isEmpty()
                 ? clicked
                 : clicked.relative(face);
 
+        Player placer = ctx.getPlayer();
+        if (placer == null) return InteractionResult.PASS;
+
         EntityType<Spaceship> type = ModEntities.SPACESHIP_ENTITY.get();
+        Spaceship ship = type.create(serverLevel);
+        if (ship == null) return InteractionResult.PASS;
 
-        Spaceship ship = type.spawn(
-                serverLevel,
-                stack,
-                ctx.getPlayer(),
-                placePos,
-                MobSpawnType.SPAWN_EGG,
-                true,                             // align to surface
-                !clicked.equals(placePos) && face == Direction.UP // same as spawn eggs
-        );
+        // --- position & rotation BEFORE adding to world ---
+        double x = placePos.getX() + 0.5;
+        double y = placePos.getY();
+        double z = placePos.getZ() + 0.5;
+        float yaw = placer.getYRot() + 180.0F;
 
-        if (ship != null) {
-            Player placer = ctx.getPlayer();
-            if (placer != null) {
-                float yaw = placer.getYRot() + 180.0F;
-                ship.setYRot(yaw);
-                ship.setYBodyRot(yaw);
-                ship.setYHeadRot(yaw);
-            }
-            if (!ctx.getPlayer().getAbilities().instabuild) {
-                stack.shrink(1);
-            }
-            level.gameEvent(ctx.getPlayer(), GameEvent.ENTITY_PLACE, clicked);
-            return InteractionResult.CONSUME;
+        ship.absMoveTo(x, y, z, yaw, 0.0F);
+        ship.setYHeadRot(yaw);
+        ship.setYBodyRot(yaw);
+        ship.refreshDimensions();
+
+        // collision check (like vanilla boats)
+        if (!serverLevel.noCollision(ship, ship.getBoundingBox())) {
+            return InteractionResult.PASS;
         }
 
-        ctx.getPlayer().awardStat(Stats.ITEM_USED.get(this));
-        return InteractionResult.PASS;
+        // run spawn initialization
+        ship.finalizeSpawn(
+                serverLevel,
+                serverLevel.getCurrentDifficultyAt(placePos),
+                MobSpawnType.SPAWN_EGG,
+                null,
+                null
+        );
+
+        // now add to world — this sends the correct position/rotation to clients
+        serverLevel.addFreshEntity(ship);
+
+        // consume item if not in creative
+        if (!placer.getAbilities().instabuild) {
+            stack.shrink(1);
+        }
+
+        // fire game event & stat
+        level.gameEvent(placer, GameEvent.ENTITY_PLACE, clicked);
+        placer.awardStat(Stats.ITEM_USED.get(this));
+
+        return InteractionResult.CONSUME;
     }
+
+
 }

@@ -4,8 +4,12 @@ import com.mojang.logging.LogUtils;
 import com.outrightwings.bound_for_the_stars.block.ModBlocks;
 import com.outrightwings.bound_for_the_stars.entity.ModEntities;
 import com.outrightwings.bound_for_the_stars.item.ModItems;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -37,6 +41,7 @@ public class Main
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::registerEntityAttributes);
 
         ModBlocks.BLOCKS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
@@ -44,6 +49,7 @@ public class Main
         ModEntities.ENTITY_TYPES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
+
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
@@ -53,6 +59,15 @@ public class Main
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
     {
+    }
+    @SubscribeEvent
+    public void registerEntityAttributes(EntityAttributeCreationEvent event) {
+        AttributeSupplier.Builder genericAttribs = PathfinderMob.createMobAttributes()
+                .add(Attributes.FOLLOW_RANGE, 16)
+                .add(Attributes.MAX_HEALTH, 3);
+
+        event.put(ModEntities.SPACESHIP_ENTITY.get(), genericAttribs.build());
+
     }
 }
 
