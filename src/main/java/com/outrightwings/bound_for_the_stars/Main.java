@@ -3,6 +3,7 @@ package com.outrightwings.bound_for_the_stars;
 import com.mojang.logging.LogUtils;
 import com.outrightwings.bound_for_the_stars.block.ModBlocks;
 import com.outrightwings.bound_for_the_stars.entity.ModEntities;
+import com.outrightwings.bound_for_the_stars.entity.ModVillager;
 import com.outrightwings.bound_for_the_stars.item.ModItems;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -47,6 +48,8 @@ public class Main
         ModItems.ITEMS.register(modEventBus);
         ModItems.CREATIVE_TABS.register(modEventBus);
         ModEntities.ENTITY_TYPES.register(modEventBus);
+        ModVillager.POI.register(modEventBus);
+        ModVillager.PROFESSION.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -72,3 +75,6 @@ public class Main
 }
 
 //TODO Spaceship Item Icon
+//TODO Telscope textures
+//TODO Villager skin
+//TODO add moon rock(random rot) and moon terracotta blocks(directional)
