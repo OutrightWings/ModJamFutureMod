@@ -1,5 +1,6 @@
 package com.outrightwings.bound_for_the_stars.item;
 
+import com.outrightwings.bound_for_the_stars.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -23,5 +24,6 @@ public class ModItems {
         .icon(() -> SPACESHIP_ITEM.get().getDefaultInstance())
         .displayItems((parameters, output) -> {
             output.accept(SPACESHIP_ITEM.get());
+            output.accept(ModBlocks.TELESCOPE_ITEM.get());
         }).build());
 }
