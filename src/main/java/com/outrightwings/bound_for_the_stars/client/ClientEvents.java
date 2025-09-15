@@ -48,13 +48,12 @@ public class ClientEvents {
 
             PoseStack pose = event.getPoseStack();
             pose.pushPose();
-
             float pitch = ship.getShipPitch();
             Vec3 lookDirection = ship.getLookAngle();
             Vec3 axisRotationVec = new Vec3(0,-1,0).cross(lookDirection);
             var axis = Axis.of(axisRotationVec.toVector3f());
             pose.mulPose(axis.rotationDegrees(pitch));
-
+            //pose.popPose();
         }
 
         @SubscribeEvent

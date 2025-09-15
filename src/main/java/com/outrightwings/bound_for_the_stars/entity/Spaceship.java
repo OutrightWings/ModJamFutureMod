@@ -3,29 +3,21 @@ package com.outrightwings.bound_for_the_stars.entity;
 import com.google.common.collect.Lists;
 import com.outrightwings.bound_for_the_stars.Main;
 import com.outrightwings.bound_for_the_stars.item.ModItems;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.DismountHelper;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -77,7 +69,11 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
     private float pitchRate = 1.5f;
     private float maxPitch = 0f;
     private float minPitch = -135f;
-    private float currentSpeed = 0.3f;
+    private float maxSpeed = 1f;
+    private float currSpeed = 0f;
+    private float ticksToSpeed = 25f;
+    private float ticksToZero = 25f;
+    private long currTicksSpeed = 0;
     @Override
     public void travel(Vec3 ignored) {
         if (!this.isAlive() || !this.isVehicle()) return;
@@ -86,27 +82,27 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         if (rider == null) return;
 
         // --- yaw tank-controls ---
-        // positive rider.xxa = pressing D, negative = A
-        // flip sign so A turns left, D turns right
         this.setYRot(this.getYRot() + (-rider.xxa * turnRate));
         this.yBodyRot = this.getYRot();
         this.yHeadRot = this.getYRot();
 
         // --- pitch (tilt) control with W/S ---
-        // we keep our own pitch field so movement & rendering can use it
         this.shipPitch = Mth.clamp(
                 this.shipPitch - rider.zza * pitchRate,
                 minPitch, maxPitch
         );
 
         // --- vertical movement toggle ---
-        if (thrustOn) {                     // toggled with space bar
-            Vec3 up = getUpVectorFromPitchYaw(shipPitch, getYRot());
-            setDeltaMovement(up.scale(currentSpeed));
+        Vec3 up = getUpVectorFromPitchYaw(shipPitch, getYRot());
+        float speed, mult;
+        long time = Minecraft.getInstance().level.getGameTime();
+        if (thrustOn) {
+            mult = Mth.clamp((time - currTicksSpeed) / ticksToSpeed,0,1);
         } else {
-            setDeltaMovement(Vec3.ZERO);
+            mult = 1f-Mth.clamp((time - currTicksSpeed) / ticksToZero,0,1);
         }
-
+        speed = currSpeed * mult;
+        setDeltaMovement(up.scale(speed));
         this.move(MoverType.SELF, getDeltaMovement());
     }
     private static Vec3 getUpVectorFromPitchYaw(float pitch, float yaw) {
@@ -118,15 +114,15 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         float z =  -Mth.cos(yawRad) * Mth.sin(pitchRad);
         return new Vec3(x, y, z);
     }
-
-
     public void onPlayerJump(int jumpPower) {
-        // Called when the rider actually tries to jump.
-        // For a toggle, just flip thrust each time.
         this.thrustOn = !this.thrustOn;
+        currTicksSpeed = Minecraft.getInstance().level.getGameTime();
+        if(thrustOn){
+            currSpeed = maxSpeed * (jumpPower/100f);
+        }
     }
     public boolean canJump() {
-        return true; // allow the jump packet to be sent to us
+        return true;
     }
     public void handleStartJump(int jumpPower) {
         this.playerJumping = true;
@@ -137,52 +133,10 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
     public float getShipPitch() {
         return shipPitch;
     }
-
-
     public LivingEntity getControllingPassenger() {
         return getFirstPassenger() instanceof LivingEntity entity ? entity : null;
     }
     public boolean isControlledByLocalInstance() { return true; }
-//    @Override
-//    protected void positionRider(Entity passenger, MoveFunction move) {
-//        if (!this.hasPassenger(passenger)) return;
-//
-//        double seatOffset = (this.isRemoved() ? 0.01 : this.getPassengersRidingOffset())
-//                + passenger.getMyRidingOffset();
-//        Vec3 localSeat = new Vec3(0.0, seatOffset, 0.0);
-//        Vec3 worldSeat = rotateSeat(localSeat, this.getYRot(), this.shipPitch);
-//
-//        move.accept(
-//                passenger,
-//                this.getX() + worldSeat.x,
-//                this.getY() + worldSeat.y,
-//                this.getZ() + worldSeat.z
-//        );
-//
-//        // keep body facing ship yaw only (no pitch)
-//        passenger.setYRot(this.getYRot());
-//        passenger.setYBodyRot(this.getYRot());
-//        passenger.setYHeadRot(passenger.getYHeadRot()); // leave head free
-//    }
-//
-//    /** Rotates a local offset by yaw (degrees) and pitch (degrees). */
-//    private static Vec3 rotateSeat(Vec3 local, float yawDeg, float pitchDeg) {
-//        double yaw = Math.toRadians(yawDeg);
-//        double pitch = Math.toRadians(pitchDeg);
-//
-//        // pitch around X
-//        double cp = Math.cos(pitch), sp = Math.sin(pitch);
-//        double y1 = local.y * cp - local.z * sp;
-//        double z1 = local.y * sp + local.z * cp;
-//
-//        // yaw around Y
-//        double cy = Math.cos(-yaw), sy = Math.sin(-yaw);
-//        double x2 = local.x * cy - z1 * sy;
-//        double z2 = local.x * sy + z1 * cy;
-//
-//        return new Vec3(x2, y1, z2);
-//    }
-
     public double getPassengersRidingOffset() {
         return 1.25f;
     }
