@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:flat_cache",
+  "argument":{
+            "type": "minecraft:mul",
+            "argument1": "minecraft:shift_x",
+            "argument2": -1.0
+            }
+}

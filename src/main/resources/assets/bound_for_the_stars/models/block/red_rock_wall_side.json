@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_side",
+  "textures": {
+    "wall": "bound_for_the_stars:block/red_rock"
+  }
+}

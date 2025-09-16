@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:mul",
+  "argument1": 0.2,
+  "argument2": "bound_for_the_stars:moon/continents"
+}

@@ -1,5 +1,6 @@
 package com.outrightwings.bound_for_the_stars.item;
 
+import com.outrightwings.bound_for_the_stars.Main;
 import com.outrightwings.bound_for_the_stars.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
@@ -16,14 +17,14 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final RegistryObject<Item> SPACESHIP_ITEM = ITEMS.register("spaceship_item", () -> new SpaceshipItem(new Item.Properties()));
 
-
-
-
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
     public static final RegistryObject<CreativeModeTab> MOD_TAB = CREATIVE_TABS.register("mod_tab", () -> CreativeModeTab.builder()
         .icon(() -> SPACESHIP_ITEM.get().getDefaultInstance())
         .displayItems((parameters, output) -> {
             output.accept(SPACESHIP_ITEM.get());
-            output.accept(ModBlocks.TELESCOPE_ITEM.get());
+            output.accept(ModBlocks.TELESCOPE.getB().get());
+            ForgeRegistries.ITEMS.getEntries().stream().filter(o -> o.getValue().getDescriptionId().contains(MODID)).forEach((object ->
+                    output.accept(object.getValue().asItem())
+            ));
         }).build());
 }

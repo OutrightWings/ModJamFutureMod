@@ -28,7 +28,7 @@ import static com.outrightwings.bound_for_the_stars.Main.MODID;
 public class ModVillager {
     //POI
     public static final DeferredRegister<PoiType> POI = DeferredRegister.create(ForgeRegistries.POI_TYPES, Main.MODID);
-    public static RegistryObject<PoiType> ASTRONOMER_POI = POI.register("astronomer",()-> new PoiType(ImmutableSet.copyOf(ModBlocks.TELESCOPE.get().getStateDefinition().getPossibleStates()), 1, 1));
+    public static RegistryObject<PoiType> ASTRONOMER_POI = POI.register("astronomer",()-> new PoiType(ImmutableSet.copyOf(ModBlocks.TELESCOPE.getA().get().getStateDefinition().getPossibleStates()), 1, 1));
 
     //Profession
     public static final DeferredRegister<VillagerProfession> PROFESSION = DeferredRegister.create(ForgeRegistries.VILLAGER_PROFESSIONS, Main.MODID);
