@@ -78,3 +78,4 @@ public class Main
 //TODO Telscope textures
 //TODO Villager skin
 //TODO add moon rock(random rot) and moon terracotta blocks(directional)
+//TODO Spaceship loottable, Telescope loottable

@@ -32,14 +32,8 @@ public class ClientEvents {
         event.registerEntityRenderer(ModEntities.SPACESHIP_ENTITY.get(), SpaceshipRenderer::new);
     }
 
-
-
-    @Mod.EventBusSubscriber(
-            modid = "bound_for_the_stars",
-            bus = Mod.EventBusSubscriber.Bus.FORGE, // << use FORGE bus
-            value = Dist.CLIENT
-    )
-    public class RiderTiltHandler {
+    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
+    public static class RiderTiltHandler {
 
         @SubscribeEvent
         public static void onRenderPlayerPre(RenderPlayerEvent.Pre event) {
