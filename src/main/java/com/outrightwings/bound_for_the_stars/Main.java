@@ -81,3 +81,9 @@ public class Main
 //TODO Spaceship Item Icon
 //TODO Telscope textures
 //TODO Villager skin
+//TODO moon stone surface decorations
+//TODO moon crater carver (lliw)
+//TODO moon skybox
+//TODO cheese moon surface block, moon stone block
+//TODO moon structures
+//TODO moon caves are lined with basalt
