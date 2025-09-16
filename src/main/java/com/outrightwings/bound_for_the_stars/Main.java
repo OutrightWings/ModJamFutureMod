@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
 
@@ -57,7 +58,10 @@ public class Main
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-
+//        LOGGER.debug("Start here");
+//        ForgeRegistries.ITEMS.getEntries().stream().filter(o -> o.getValue().getDescriptionId().contains(MODID)).forEach((object ->
+//                LOGGER.debug(object.getValue().asItem().getDescriptionId())
+//        ));
     }
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
@@ -77,5 +81,3 @@ public class Main
 //TODO Spaceship Item Icon
 //TODO Telscope textures
 //TODO Villager skin
-//TODO add moon rock(random rot) and moon terracotta blocks(directional)
-//TODO Spaceship loottable, Telescope loottable
