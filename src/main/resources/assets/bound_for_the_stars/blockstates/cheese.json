@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {"model": "bound_for_the_stars:block/cheese"},
+      {"model": "bound_for_the_stars:block/cheese1"},
+      {"model": "bound_for_the_stars:block/cheese2"}
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bound_for_the_stars:block/moon_cobble_slab"
+    },
+    "type=double": {
+      "model": "bound_for_the_stars:block/moon_cobble"
+    },
+    "type=top": {
+      "model": "bound_for_the_stars:block/moon_cobble_slab_top"
+    }
+  }
+}

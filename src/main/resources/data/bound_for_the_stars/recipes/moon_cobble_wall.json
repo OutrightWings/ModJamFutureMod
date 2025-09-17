@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "bound_for_the_stars:moon_cobble"
+    }
+  },
+  "result": {
+    "item": "bound_for_the_stars:moon_cobble_wall",
+    "count": 6
+  }
+}

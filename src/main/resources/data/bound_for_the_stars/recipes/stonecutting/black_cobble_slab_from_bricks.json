@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "bound_for_the_stars:black_cobble"
+  },
+  "result": "bound_for_the_stars:black_cobble_slab",
+  "count": 2
+}

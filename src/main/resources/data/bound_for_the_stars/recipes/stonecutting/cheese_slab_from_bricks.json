@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "bound_for_the_stars:cheese"
+  },
+  "result": "bound_for_the_stars:cheese_slab",
+  "count": 2
+}

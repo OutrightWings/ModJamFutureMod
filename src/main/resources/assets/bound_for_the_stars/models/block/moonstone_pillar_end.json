@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "bound_for_the_stars:block/moonstone_pillar_top",
+    "side": "bound_for_the_stars:block/moonstone_pillar_end"
+  }
+}

@@ -22,6 +22,28 @@
     "bound_for_the_stars:red_rock",
     "bound_for_the_stars:red_rock_stairs",
     "bound_for_the_stars:red_rock_slab",
-    "bound_for_the_stars:red_rock_wall"
+    "bound_for_the_stars:red_rock_wall",
+
+    "bound_for_the_stars:cheese",
+    "bound_for_the_stars:cheese_slab",
+    "bound_for_the_stars:cheese_stairs",
+    "bound_for_the_stars:cheese_wall",
+    "bound_for_the_stars:moon_cobble",
+    "bound_for_the_stars:moon_cobble_slab",
+    "bound_for_the_stars:moon_cobble_stairs",
+    "bound_for_the_stars:moon_cobble_wall",
+    "bound_for_the_stars:moonstone",
+    "bound_for_the_stars:moonstone_slab",
+    "bound_for_the_stars:moonstone_stairs",
+    "bound_for_the_stars:moonstone_wall",
+    "bound_for_the_stars:packed_moon_dust",
+    "bound_for_the_stars:packed_moon_dust_slab",
+    "bound_for_the_stars:packed_moon_dust_stairs",
+    "bound_for_the_stars:packed_moon_dust_wall",
+
+    "bound_for_the_stars:moonstone_pillar",
+    "bound_for_the_stars:moonstone_terracotta",
+
+    "bound_for_the_stars:moonstone_pillar_end"
   ]
 }

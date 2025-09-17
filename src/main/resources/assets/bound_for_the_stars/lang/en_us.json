@@ -1,6 +1,7 @@
 {
   "itemGroup.bound_for_the_stars": "Bound For The Stars",
   "entity.bound_for_the_stars.spaceship":"Spaceship",
+  "entity.minecraft.villager.bound_for_the_stars.astronomer":"Astronomer",
   "item.bound_for_the_stars.spaceship_item":"Spaceship",
   "block.bound_for_the_stars.telescope":"Telescope",
   "block.bound_for_the_stars.moon_terracotta":"Moon Terracotta",
@@ -23,5 +24,28 @@
   "block.bound_for_the_stars.red_rock":"Red Rock",
   "block.bound_for_the_stars.red_rock_stairs":"Red Rock Stairs",
   "block.bound_for_the_stars.red_rock_slab":"Red Rock Slab",
-  "block.bound_for_the_stars.red_rock_wall":"Red Rock Wall"
+  "block.bound_for_the_stars.red_rock_wall":"Red Rock Wall",
+  "block.bound_for_the_stars.cheese":"Cheese",
+  "block.bound_for_the_stars.cheese_slab":"Cheese Slab",
+  "block.bound_for_the_stars.cheese_stairs":"Cheese Stairs",
+  "block.bound_for_the_stars.cheese_wall":"Cheese Wall",
+  "block.bound_for_the_stars.moon_cobble":"Moon Cobble",
+  "block.bound_for_the_stars.moon_cobble_slab":"Moon Cobble Slab",
+  "block.bound_for_the_stars.moon_cobble_stairs":"Moon Cobble Stairs",
+  "block.bound_for_the_stars.moon_cobble_wall":"Moon Cobble Wall",
+  "block.bound_for_the_stars.moonstone":"Moonstone",
+  "block.bound_for_the_stars.moonstone_slab":"Moonstone Slab",
+  "block.bound_for_the_stars.moonstone_stairs":"Moonstone Stairs",
+  "block.bound_for_the_stars.moonstone_wall":"Moonstone Wall",
+  "block.bound_for_the_stars.packed_moon_dust":"Packed Moon Dust",
+  "block.bound_for_the_stars.packed_moon_dust_slab":"Packed Moon Dust Slab",
+  "block.bound_for_the_stars.packed_moon_dust_stairs":"Packed Moon Dust Stairs",
+  "block.bound_for_the_stars.packed_moon_dust_wall":"Packed Moon Dust Wall",
+
+  "block.bound_for_the_stars.moon_dust":"Moon Dust",
+  "block.bound_for_the_stars.moonstone_pillar":"Moonstone Pillar",
+  "block.bound_for_the_stars.moonstone_terracotta":"Moonstone Terracotta",
+
+  "block.bound_for_the_stars.moon_dust_rocky":"Moon Dust Rocky",
+"block.bound_for_the_stars.moonstone_pillar_end":"Moonstone Pillar End"
 }

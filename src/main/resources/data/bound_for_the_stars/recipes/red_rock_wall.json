@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "bound_for_the_stars:red_rock"
+    }
+  },
+  "result": {
+    "item": "bound_for_the_stars:red_rock_wall",
+    "count": 6
+  }
+}

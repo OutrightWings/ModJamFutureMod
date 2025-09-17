@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "bound_for_the_stars:block/moonstone_pillar_end_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "bound_for_the_stars:block/moonstone_pillar_end"
+    },
+    "axis=z": {
+      "model": "bound_for_the_stars:block/moonstone_pillar_end_horizontal",
+      "x": 90
+    }
+  }
+}

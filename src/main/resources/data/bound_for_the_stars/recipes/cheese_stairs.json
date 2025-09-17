@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "bound_for_the_stars:cheese"
+    }
+  },
+  "result": {
+    "item": "bound_for_the_stars:cheese_stairs",
+    "count": 4
+  }
+}

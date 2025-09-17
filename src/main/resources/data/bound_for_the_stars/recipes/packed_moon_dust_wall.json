@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "bound_for_the_stars:packed_moon_dust"
+    }
+  },
+  "result": {
+    "item": "bound_for_the_stars:packed_moon_dust_wall",
+    "count": 6
+  }
+}

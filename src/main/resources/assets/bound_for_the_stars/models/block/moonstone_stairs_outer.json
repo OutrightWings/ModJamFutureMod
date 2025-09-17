@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "bound_for_the_stars:block/moonstone",
+    "top": "bound_for_the_stars:block/moonstone",
+    "side": "bound_for_the_stars:block/moonstone"
+  }
+}

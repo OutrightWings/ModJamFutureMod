@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "bound_for_the_stars:black_rock"
+  },
+  "result": "bound_for_the_stars:black_rock_stairs",
+  "count": 1
+}

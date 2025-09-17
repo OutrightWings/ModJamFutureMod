@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "bound_for_the_stars:red_rock"
+  },
+  "result": "bound_for_the_stars:red_rock_wall",
+  "count": 1
+}

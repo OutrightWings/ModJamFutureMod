@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "bound_for_the_stars:packed_moon_dust"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "bound_for_the_stars:moon_dust"
+  }
+}

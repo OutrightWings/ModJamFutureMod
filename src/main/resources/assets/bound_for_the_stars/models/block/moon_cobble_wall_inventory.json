@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "bound_for_the_stars:block/moon_cobble"
+  }
+}

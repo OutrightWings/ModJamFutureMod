@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "bound_for_the_stars:packed_moon_dust"
+  },
+  "result": "bound_for_the_stars:packed_moon_dust_wall",
+  "count": 1
+}
