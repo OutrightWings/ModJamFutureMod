@@ -77,7 +77,11 @@ public class Main
 
     }
 }
-
+//TODO walls tagged as walls
+//TODO get rid of moon rock
+//TODO moondust item, moondust snow slabs
+//TODO moondsut particles
+//TODO Spaceship not syncing for server! Auto 3rd person
 //TODO Spaceship Item Icon
 //TODO Telscope textures
 //TODO Villager skin

@@ -23,8 +23,8 @@ public class ModItems {
         .title(Component.translatable("itemGroup." + MODID))
         .icon(() -> SPACESHIP_ITEM.get().getDefaultInstance())
         .displayItems((parameters, output) -> {
-            ForgeRegistries.ITEMS.getEntries().stream().filter(o -> o.getValue().getDescriptionId().contains(MODID)).forEach((object ->
-                    output.accept(object.getValue().asItem())
+            ITEMS.getEntries().stream().filter(o -> o.get().getDescriptionId().contains(MODID)).forEach((object ->
+                    output.accept(object.get().asItem())
             ));
         }).build());
 }

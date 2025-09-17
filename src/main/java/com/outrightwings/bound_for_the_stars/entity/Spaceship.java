@@ -1,10 +1,13 @@
 package com.outrightwings.bound_for_the_stars.entity;
 
 import com.google.common.collect.Lists;
-import com.outrightwings.bound_for_the_stars.Main;
 import com.outrightwings.bound_for_the_stars.item.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -36,6 +39,31 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         this.noCulling = true;
     }
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob partner) {return null;}
+    //Data
+    private static final EntityDataAccessor<Float> PITCH_DATA = SynchedEntityData.defineId(Spaceship.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Float> CURR_SPEED_DATA = SynchedEntityData.defineId(Spaceship.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Long> CURR_TICKS_SPEED_DATA = SynchedEntityData.defineId(Spaceship.class, EntityDataSerializers.LONG);
+    @Override
+    public void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(PITCH_DATA,0f);
+        this.entityData.define(CURR_SPEED_DATA,0f);
+        this.entityData.define(CURR_TICKS_SPEED_DATA,0L);
+    }
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        shipPitch = tag.getFloat("pitch");
+        currSpeed = tag.getFloat("curr_speed");
+        currTicksSpeed = tag.getLong("curr_ticks_speed");
+    }
+    @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        tag.putFloat("pitch",shipPitch);
+        tag.putFloat("curr_speed",currSpeed);
+        tag.putFloat("curr_ticks_speed",currTicksSpeed);
+    }
 
     //Collide
     public boolean canCollideWith(Entity entity) {
