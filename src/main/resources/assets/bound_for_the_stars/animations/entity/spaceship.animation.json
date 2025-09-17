@@ -1,21 +1,337 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"spaceship.idle": {
-			"loop": true,
-			"animation_length": 2,
+		"spaceship.land": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 1,
 			"bones": {
 				"Spaceship": {
 					"position": {
 						"0.0": {
+							"vector": [0, 4, 0]
+						},
+						"0.375": {
+							"vector": [0, -1, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"windowF": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.625": {
 							"vector": [0, 0, 0]
 						},
 						"1.0": {
-							"vector": [0, 2, 0]
+							"vector": [0, 8, 0]
+						}
+					}
+				},
+				"doorFront": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
 						},
-						"2.0": {
+						"0.5833": {
+							"vector": [0, 0, 0]
+						},
+						"1.0": {
+							"vector": [0, -11, 0]
+						}
+					}
+				},
+				"SupportBL": {
+					"rotation": {
+						"0.0": {
+							"vector": [-15, 0, 15]
+						},
+						"0.2917": {
 							"vector": [0, 0, 0]
 						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 5, 0]
+						},
+						"0.375": {
+							"vector": [0, 1, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"SupportFL": {
+					"rotation": {
+						"0.0": {
+							"vector": [15, 0, 15]
+						},
+						"0.2917": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 5, 0]
+						},
+						"0.375": {
+							"vector": [0, 1, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"SupportFR": {
+					"rotation": {
+						"0.0": {
+							"vector": [90, -15, 75]
+						},
+						"0.2917": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 5, 0]
+						},
+						"0.375": {
+							"vector": [0, 1, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"SupportBR": {
+					"rotation": {
+						"0.0": {
+							"vector": [-14.51082, -3.84097, -14.51082]
+						},
+						"0.2917": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 5, 0]
+						},
+						"0.375": {
+							"vector": [0, 1, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
+		},
+		"spaceship.launch": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 1,
+			"bones": {
+				"Spaceship": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.125": {
+							"vector": [0, -1, 0],
+							"easing": "linear"
+						},
+						"1.0": {
+							"vector": [0, 12, 0],
+							"easing": "easeInQuart"
+						}
+					}
+				},
+				"windowF": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"doorFront": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"SupportBL": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.1667": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [-15, 0, 15]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.1667": {
+							"vector": [0, 1, 0]
+						},
+						"0.5": {
+							"vector": [0, 5, 0]
+						}
+					}
+				},
+				"SupportFL": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.1667": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [15, 0, 15]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.1667": {
+							"vector": [0, 1, 0]
+						},
+						"0.5": {
+							"vector": [0, 5, 0]
+						}
+					}
+				},
+				"SupportFR": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.1667": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [90, -15, 75]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.1667": {
+							"vector": [0, 1, 0]
+						},
+						"0.5": {
+							"vector": [0, 5, 0]
+						}
+					}
+				},
+				"SupportBR": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.1667": {
+							"vector": [0, 0, 0]
+						},
+						"0.5": {
+							"vector": [-14.51082, -3.84097, -14.51082]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.1667": {
+							"vector": [0, 1, 0]
+						},
+						"0.5": {
+							"vector": [0, 5, 0]
+						}
+					}
+				}
+			}
+		},
+		"spaceship.close": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 0.5,
+			"bones": {
+				"Spaceship": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"windowF": {
+					"position": {
+						"0.0": {
+							"vector": [0, 8, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"doorFront": {
+					"position": {
+						"0.0": {
+							"vector": [0, -11, 0]
+						},
+						"0.4583": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"SupportBL": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"SupportFL": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"SupportFR": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"SupportBR": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
 					}
 				}
 			}
