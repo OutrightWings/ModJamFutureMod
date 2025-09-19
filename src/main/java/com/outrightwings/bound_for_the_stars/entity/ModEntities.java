@@ -1,9 +1,13 @@
 package com.outrightwings.bound_for_the_stars.entity;
 
+import com.outrightwings.bound_for_the_stars.Main;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -20,4 +24,7 @@ public class ModEntities {
                     .fireImmune()
                     .build(new ResourceLocation(MODID, "spaceship").toString())
             );
+
+    public static final ResourceKey<Level> MOON = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(MODID,"the_moon"));
+
 }

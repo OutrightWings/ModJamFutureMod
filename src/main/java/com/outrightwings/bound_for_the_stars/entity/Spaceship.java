@@ -11,18 +11,24 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.DismountHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.common.util.ITeleporter;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -33,6 +39,7 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
+import java.util.function.Function;
 
 public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumping{
     public Spaceship(EntityType<? extends Animal> type, Level level) {
@@ -116,21 +123,29 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
     public void travel(Vec3 ignored) {
         if (!this.isAlive() || !this.isVehicle()) return;
 
-        LivingEntity rider = (LivingEntity) getControllingPassenger();
+        LivingEntity rider = getControllingPassenger();
         if (rider == null) return;
 
-        // --- yaw tank-controls ---
+        if(level().dimension().equals(ModEntities.MOON)){
+            spaceMovement(rider);
+        }
+        else {
+            nonSpaceMovement(rider);
+        }
+    }
+    private void spaceMovement(LivingEntity rider){
+        // Yaw
         this.setYRot(this.getYRot() + (-rider.xxa * turnRate));
         this.yBodyRot = this.getYRot();
         this.yHeadRot = this.getYRot();
 
-        // --- pitch (tilt) control with W/S ---
+        // Pitch
         this.shipPitch = Mth.clamp(
                 this.shipPitch - rider.zza * pitchRate,
                 minPitch, maxPitch
         );
 
-        // --- vertical movement toggle ---
+        // move
         Vec3 up = getUpVectorFromPitchYaw(shipPitch, getYRot());
         float speed, mult;
         long time = Minecraft.getInstance().level.getGameTime();
@@ -143,25 +158,59 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         setDeltaMovement(up.scale(speed));
         this.move(MoverType.SELF, getDeltaMovement());
     }
-    @Override
+    private void nonSpaceMovement(LivingEntity rider){
+        double gravity = this.getAttribute(ForgeMod.ENTITY_GRAVITY.get()).getValue();
+        // move
+        Vec3 up = getUpVectorFromPitchYaw(shipPitch, getYRot());
+        float speed, mult;
+        long time = Minecraft.getInstance().level.getGameTime();
+        if (thrustOn) {
+            mult = Mth.clamp((time - currTicksSpeed) / ticksToSpeed,0,1);
+        } else {
+            mult = 1f-Mth.clamp((time - currTicksSpeed) / ticksToZero,0,1);
+        }
+        speed = currSpeed * mult;
+        Vec3 motion;
+        if(thrustOn){
+            motion =  up.scale(speed);
+        }
+        else {
+            //TODO make this nicer feeling. Maybe the player must orient the ship nose up to land? or the ship breaks?
+            motion = this.getDeltaMovement().add((double)0.0F, -gravity / (double)4.0F, (double)0.0F);
+        }
+        setDeltaMovement(motion);
+        this.move(MoverType.SELF, getDeltaMovement());
+    }
     public void tick(){
         super.tick();
-        if(!level().isClientSide) return;
-
-        //Take off particles
-        boolean onGround = isEffectivelyOnGround(0.5);
-        Vec3 point = getThrusterWorldPos();
-        if(!onGround && !takeOff){ //Have just left the ground
-            takeOff = true;
-            spawnTakeoffBurst(point);
+        if(!level().isClientSide){ //server side
+            if (getY() > 300 && getControllingPassenger() instanceof ServerPlayer player) {
+                  ServerLevel target = getServer().getLevel(ModEntities.MOON);
+                if (target != null) {
+//                    int x = this.getBlockX();
+//                    int z = this.getBlockZ();
+//                    int surfaceY = target.getHeight(Heightmap.Types.WORLD_SURFACE, x, z);
+                    BlockPos spawnSurface = new BlockPos(0, 200, 0);
+                    teleportWithPassenger(player, target, spawnSurface);
+                }
+            }
         }
-        if(onGround){ //Back on the ground
-            takeOff = false;
-        }
+        else{ //Client side
+            //Take off particles
+            boolean onGround = isEffectivelyOnGround(0.5);
+            Vec3 point = getThrusterWorldPos();
+            if(!onGround && !takeOff){ //Have just left the ground
+                takeOff = true;
+                spawnTakeoffBurst(point);
+            }
+            if(onGround){ //Back on the ground
+                takeOff = false;
+            }
 
-        //Movement particles
-        if(getDeltaMovement().lengthSqr() > 0.1){
-            spawnTrailSmoke(point);
+            //Movement particles
+            if(thrustOn && getDeltaMovement().lengthSqr() > 0.1){
+                spawnTrailSmoke(point);
+            }
         }
     }
     private boolean isEffectivelyOnGround(double threshold) {
@@ -199,7 +248,8 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         }
         return false;
     }
-
+    public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource source) {return false;}
+    protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {}
     private Vec3 getThrusterWorldPos() {
         Vec3 localOffset = new Vec3(0, -1, 0);
 
@@ -237,6 +287,32 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
                 basePos.y,
                 basePos.z + (random.nextDouble() - 0.5) * spread,
                 0.0, 0.02, 0.0);
+    }
+    private void teleportWithPassenger(ServerPlayer player, ServerLevel target, BlockPos pos) {
+        //TODO make this work lol
+        this.ejectPassengers();
+        Entity newShip = this.changeDimension(target, new ITeleporter() {
+            @Override
+            public Entity placeEntity(Entity entity, ServerLevel current, ServerLevel dest, float yaw, Function<Boolean, Entity> reposition) {
+                Entity e = reposition.apply(true);
+                e.teleportTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+                return e;
+            }
+        });
+        this.discard();
+        Entity newPlayer = player.changeDimension(target, new ITeleporter() {
+            @Override
+            public Entity placeEntity(Entity entity, ServerLevel current, ServerLevel dest, float yaw, Function<Boolean, Entity> reposition) {
+                Entity p = reposition.apply(false);
+                p.teleportTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+
+//                if (newShip != null && !newShip.isRemoved()) {
+//                    p.startRiding(newShip, true);
+//                }
+                return p;
+            }
+        });
+        newPlayer.startRiding(newShip);
     }
 
     private static Vec3 getUpVectorFromPitchYaw(float pitch, float yaw) {
