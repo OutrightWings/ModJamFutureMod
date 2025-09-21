@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import com.outrightwings.bound_for_the_stars.Main;
 import com.outrightwings.bound_for_the_stars.client.models.SpaceshipGeo;
+import com.outrightwings.bound_for_the_stars.client.renderers.AlienRenderer;
 import com.outrightwings.bound_for_the_stars.client.renderers.SpaceshipRenderer;
 import com.outrightwings.bound_for_the_stars.entity.ModEntities;
 import com.outrightwings.bound_for_the_stars.entity.Spaceship;
@@ -30,6 +31,7 @@ public class ClientEvents {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event){
         event.registerEntityRenderer(ModEntities.SPACESHIP_ENTITY.get(), SpaceshipRenderer::new);
+        event.registerEntityRenderer(ModEntities.ALIEN_ENTITY.get(), AlienRenderer::new);
     }
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
