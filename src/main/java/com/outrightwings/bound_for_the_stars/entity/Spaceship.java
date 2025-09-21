@@ -405,18 +405,28 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
 
     //Geo
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
-    protected static final RawAnimation LAUNCH_ANIM = RawAnimation.begin().thenLoop("spaceship.launch"); //Put feet up
-    protected static final RawAnimation CLOSE_ANIM = RawAnimation.begin().thenLoop("spaceship.close");  //Close the doors
-    protected static final RawAnimation LAND_ANIM = RawAnimation.begin().thenLoop("spaceship.land");    //put feet down
-    //protected static final RawAnimation OPEN_ANIM = RawAnimation.begin().thenLoop("spaceship.open");    //put feet down
+    protected static final RawAnimation LAUNCH_ANIM = RawAnimation.begin().thenPlay("spaceship.feetup"); //Put feet up
+    protected static final RawAnimation CLOSE_ANIM = RawAnimation.begin().thenPlay("spaceship.doorclose");  //Close the doors
+    protected static final RawAnimation LAND_ANIM = RawAnimation.begin().thenPlay("spaceship.feetdown");    //put feet down
+    protected static final RawAnimation OPEN_ANIM = RawAnimation.begin().thenPlay("spaceship.dooropen");    //put feet down
 
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return geoCache;
     }
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        //controllerRegistrar.add(new AnimationController<>(this,"Idle",1,this::idleAnimController));
+        controllerRegistrar.add(new AnimationController<>(this,"door",1,this::doorAnimController));
+        controllerRegistrar.add(new AnimationController<>(this,"feet",1,this::feetAnimController));
     }
-    protected <E extends Spaceship> PlayState idleAnimController(final AnimationState<E> event){
-        return event.setAndContinue(LAND_ANIM);
+    protected <E extends Spaceship> PlayState doorAnimController(final AnimationState<E> event){
+        if(!this.isVehicle()){ // player in ship
+            return event.setAndContinue(OPEN_ANIM);
+        }
+        return event.setAndContinue(CLOSE_ANIM);
+    }
+    protected <E extends Spaceship> PlayState feetAnimController(final AnimationState<E> event){
+        if(isEffectivelyOnGround(0.5)){ //On ground
+            return event.setAndContinue(LAND_ANIM);
+        }
+        return event.setAndContinue(LAUNCH_ANIM);
     }
 }
