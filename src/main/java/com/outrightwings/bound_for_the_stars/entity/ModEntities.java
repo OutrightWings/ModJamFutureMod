@@ -28,17 +28,17 @@ public class ModEntities {
             EntityType.Builder.of(Spaceship::new,  MobCategory.MISC)
                     .sized(1.75f,3.625f) //28px wide 58px tall
                     .fireImmune()
-                    .build(new ResourceLocation(MODID, "spaceship").toString())
+                    .build(ResourceLocation.fromNamespaceAndPath(MODID, "spaceship").toString())
             );
 
     public static final RegistryObject<EntityType<Alien>> ALIEN_ENTITY = ENTITY_TYPES.register("alien",()->
             EntityType.Builder.of(Alien::new,  MobCategory.CREATURE)
-                    .sized(1.75f,3.625f) //28px wide 58px tall
+                    .sized(.5f,1.5f) //28px wide 58px tall
                     .fireImmune()
-                    .build(new ResourceLocation(MODID, "alien").toString())
+                    .build(ResourceLocation.fromNamespaceAndPath(MODID, "alien").toString())
     );
 
-    public static final ResourceKey<Level> MOON = ResourceKey.create(Registries.DIMENSION, new ResourceLocation(MODID,"the_moon"));
+    public static final ResourceKey<Level> MOON = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(MODID,"the_moon"));
 
     @SubscribeEvent
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
