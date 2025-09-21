@@ -19,17 +19,17 @@ import static com.outrightwings.bound_for_the_stars.Main.MODID;
 public class ModBlocks {
         public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> TELESCOPE = createBlockWItem("telescope",()->new TelescopeBlock(BlockBehaviour.Properties.copy(Blocks.SMITHING_TABLE)));
-        public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_TERRACOTTA = createBlockWItem("moon_terracotta",()->new GlazedTerracottaBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_DUST = createBlockWItem("moon_dust",() -> new GravelBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOONSTONE_PILLAR = createBlockWItem("moonstone_pillar",() -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOONSTONE_TERRACOTTA = createBlockWItem("moonstone_terracotta",()->new GlazedTerracottaBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
-        public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_DUST_ROCKY = createBlockWItem("moon_dust_rocky",() -> new GravelBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
+        public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_DUST_ROCKY = createBlockWItem("moon_dust_rocky",() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOONSTONE_PILLAR_END = createBlockWItem("moonstone_pillar_end",() -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
+        public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> LAYERED_MOONSTONE = createBlockWItem("layered_moonstone",() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
+        public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_DUST_PATH = createBlockWItem("moon_dust_path",() -> new DirtPathBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
 
         //Block sets
         public static final List<Tuple<RegistryObject<? extends Block>,RegistryObject<BlockItem>>> BLACK_COBBLE = createBaseBlockSet("black_cobble");
         public static final List<Tuple<RegistryObject<? extends Block>,RegistryObject<BlockItem>>> BLACK_ROCK = createBaseBlockSet("black_rock");
-        public static final List<Tuple<RegistryObject<? extends Block>,RegistryObject<BlockItem>>> MOON_ROCK = createBaseBlockSet("moon_rock");
         public static final List<Tuple<RegistryObject<? extends Block>,RegistryObject<BlockItem>>> RED_COBBLE = createBaseBlockSet("red_cobble");
         public static final List<Tuple<RegistryObject<? extends Block>,RegistryObject<BlockItem>>> RED_ROCK = createBaseBlockSet("red_rock");
         public static final List<Tuple<RegistryObject<? extends Block>,RegistryObject<BlockItem>>> CHEESE = createBaseBlockSet("cheese");

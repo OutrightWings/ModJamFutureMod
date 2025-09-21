@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "bound_for_the_stars:block/moon_dust_path"
+      },
+      {
+        "model": "bound_for_the_stars:block/moon_dust_path",
+        "y": 90
+      },
+      {
+        "model": "bound_for_the_stars:block/moon_dust_path",
+        "y": 180
+      },
+      {
+        "model": "bound_for_the_stars:block/moon_dust_path",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "bound_for_the_stars:telescope",
-    "bound_for_the_stars:moon_terracotta",
     "bound_for_the_stars:black_cobble",
     "bound_for_the_stars:black_cobble_stairs",
     "bound_for_the_stars:black_cobble_slab",
@@ -11,10 +10,6 @@
     "bound_for_the_stars:black_rock_stairs",
     "bound_for_the_stars:black_rock_slab",
     "bound_for_the_stars:black_rock_wall",
-    "bound_for_the_stars:moon_rock",
-    "bound_for_the_stars:moon_rock_stairs",
-    "bound_for_the_stars:moon_rock_slab",
-    "bound_for_the_stars:moon_rock_wall",
     "bound_for_the_stars:red_cobble",
     "bound_for_the_stars:red_cobble_stairs",
     "bound_for_the_stars:red_cobble_slab",
@@ -44,6 +39,9 @@
     "bound_for_the_stars:moonstone_pillar",
     "bound_for_the_stars:moonstone_terracotta",
 
-    "bound_for_the_stars:moonstone_pillar_end"
+    "bound_for_the_stars:moonstone_pillar_end",
+
+    "bound_for_the_stars:moon_dust_rocky",
+    "bound_for_the_stars:layered_moonstone"
   ]
 }
