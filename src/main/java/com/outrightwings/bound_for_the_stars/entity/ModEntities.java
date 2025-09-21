@@ -42,16 +42,7 @@ public class ModEntities {
 
     @SubscribeEvent
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
-        AttributeSupplier.Builder ship_attribute = PathfinderMob.createMobAttributes()
-                .add(Attributes.FOLLOW_RANGE, 16)
-                .add(Attributes.MAX_HEALTH, 3);
-
-        event.put(ModEntities.SPACESHIP_ENTITY.get(), ship_attribute.build());
-
-        AttributeSupplier.Builder alien_attribute = PathfinderMob.createMobAttributes()
-                .add(Attributes.FOLLOW_RANGE, 16)
-                .add(Attributes.MAX_HEALTH, 20);
-//                .add(Attributes.MOVEMENT_SPEED,1);
-        event.put(ModEntities.ALIEN_ENTITY.get(),alien_attribute.build());
+        event.put(ModEntities.SPACESHIP_ENTITY.get(), Spaceship.createAttributes().build());
+        event.put(ModEntities.ALIEN_ENTITY.get(),Alien.createAttributes().build());
     }
 }

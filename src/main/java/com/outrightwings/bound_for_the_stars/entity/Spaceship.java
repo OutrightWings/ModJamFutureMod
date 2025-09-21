@@ -18,6 +18,8 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.DismountHelper;
@@ -46,6 +48,9 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         super(type, level);
 
         this.noCulling = true;
+    }
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, (double)3.0F);
     }
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob partner) {return null;}
     //Data
