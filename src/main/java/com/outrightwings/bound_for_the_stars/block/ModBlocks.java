@@ -19,7 +19,7 @@ import static com.outrightwings.bound_for_the_stars.Main.MODID;
 public class ModBlocks {
         public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> TELESCOPE = createBlockWItem("telescope",()->new TelescopeBlock(BlockBehaviour.Properties.copy(Blocks.SMITHING_TABLE)));
-        public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_DUST = createBlockWItem("moon_dust",() -> new GravelBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
+        public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_DUST = createBlockWItem("moon_dust",() -> new MoonDustBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOONSTONE_PILLAR = createBlockWItem("moonstone_pillar",() -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOONSTONE_TERRACOTTA = createBlockWItem("moonstone_terracotta",()->new GlazedTerracottaBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_DUST_ROCKY = createBlockWItem("moon_dust_rocky",() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));

@@ -8,7 +8,11 @@ import com.outrightwings.bound_for_the_stars.client.renderers.AlienRenderer;
 import com.outrightwings.bound_for_the_stars.client.renderers.SpaceshipRenderer;
 import com.outrightwings.bound_for_the_stars.entity.ModEntities;
 import com.outrightwings.bound_for_the_stars.entity.Spaceship;
+import com.outrightwings.bound_for_the_stars.particle.FootprintParticle;
+import com.outrightwings.bound_for_the_stars.particle.ModParticle;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.ParticleEngine;
+import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
@@ -16,6 +20,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -32,6 +37,11 @@ public class ClientEvents {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event){
         event.registerEntityRenderer(ModEntities.SPACESHIP_ENTITY.get(), SpaceshipRenderer::new);
         event.registerEntityRenderer(ModEntities.ALIEN_ENTITY.get(), AlienRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void registerParticles(RegisterParticleProvidersEvent event){
+        event.registerSpriteSet(ModParticle.FOOTPRINT.get(), FootprintParticle.Factory::new);
     }
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)

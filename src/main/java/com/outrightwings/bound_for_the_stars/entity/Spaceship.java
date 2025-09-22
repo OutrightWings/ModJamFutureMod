@@ -2,6 +2,7 @@ package com.outrightwings.bound_for_the_stars.entity;
 
 import com.google.common.collect.Lists;
 import com.outrightwings.bound_for_the_stars.Main;
+import com.outrightwings.bound_for_the_stars.dimension.ModDimensions;
 import com.outrightwings.bound_for_the_stars.item.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -131,7 +132,7 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         LivingEntity rider = getControllingPassenger();
         if (rider == null) return;
 
-        if(level().dimension().equals(ModEntities.MOON)){
+        if(level().dimension().equals(ModDimensions.MOON)){
             spaceMovement(rider);
         }
         else {
@@ -190,7 +191,7 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         super.tick();
         if(!level().isClientSide){ //server side
             if (getY() > 300 && getControllingPassenger() instanceof ServerPlayer player) {
-                  ServerLevel target = getServer().getLevel(ModEntities.MOON);
+                  ServerLevel target = getServer().getLevel(ModDimensions.MOON);
                 if (target != null) {
 //                    int x = this.getBlockX();
 //                    int z = this.getBlockZ();

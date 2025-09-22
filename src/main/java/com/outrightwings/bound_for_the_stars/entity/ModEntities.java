@@ -1,6 +1,8 @@
 package com.outrightwings.bound_for_the_stars.entity;
 
 import com.outrightwings.bound_for_the_stars.Main;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -33,12 +35,10 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<Alien>> ALIEN_ENTITY = ENTITY_TYPES.register("alien",()->
             EntityType.Builder.of(Alien::new,  MobCategory.CREATURE)
-                    .sized(.5f,1.5f) //28px wide 58px tall
+                    .sized(.5f,1.5f) //8px wide 24px tall
                     .fireImmune()
                     .build(ResourceLocation.fromNamespaceAndPath(MODID, "alien").toString())
     );
-
-    public static final ResourceKey<Level> MOON = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(MODID,"the_moon"));
 
     @SubscribeEvent
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {

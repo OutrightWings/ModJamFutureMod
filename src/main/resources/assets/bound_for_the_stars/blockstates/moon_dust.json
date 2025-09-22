@@ -1,12 +1,12 @@
 {
   "variants": {
     "": [
-      {"model": "bound_for_the_stars:block/moon_dust","weight": 4},
-      {"model": "bound_for_the_stars:block/moon_dust1","weight": 4},
+      {"model": "bound_for_the_stars:block/moon_dust","weight": 10},
+      {"model": "bound_for_the_stars:block/moon_dust1","weight": 10},
       {"model": "bound_for_the_stars:block/moon_dust2","weight": 1},
-      {"model": "bound_for_the_stars:block/moon_dust3","weight": 1},
-      {"model": "bound_for_the_stars:block/moon_dust4","weight": 1},
-      {"model": "bound_for_the_stars:block/moon_dust5","weight": 1}
+      {"model": "bound_for_the_stars:block/moon_dust3","weight": 2},
+      {"model": "bound_for_the_stars:block/moon_dust4","weight": 2},
+      {"model": "bound_for_the_stars:block/moon_dust5","weight": 2}
     ]
   }
 }
