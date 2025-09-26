@@ -1,7 +1,8 @@
 {
   "variants": {
-    "": {
-      "model": "bound_for_the_stars:block/moon_cobble"
-    }
+    "": [
+      {"model": "bound_for_the_stars:block/moon_cobble"},
+      {"model": "bound_for_the_stars:block/moon_cobble1"}
+    ]
   }
 }

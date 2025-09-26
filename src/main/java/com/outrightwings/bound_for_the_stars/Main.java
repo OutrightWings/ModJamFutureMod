@@ -5,6 +5,7 @@ import com.outrightwings.bound_for_the_stars.block.ModBlocks;
 import com.outrightwings.bound_for_the_stars.entity.ModEntities;
 import com.outrightwings.bound_for_the_stars.entity.ModVillager;
 import com.outrightwings.bound_for_the_stars.item.ModItems;
+import com.outrightwings.bound_for_the_stars.particle.ModParticle;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -38,6 +39,7 @@ public class Main
         ModEntities.ENTITY_TYPES.register(modEventBus);
         ModVillager.POI.register(modEventBus);
         ModVillager.PROFESSION.register(modEventBus);
+        ModParticle.PARTICLE_TYPES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
 
