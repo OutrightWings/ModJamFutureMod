@@ -12,7 +12,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class TelescopeBlock extends HorizontalDirectionalBlock {
-    private static final VoxelShape BOUNDING = Block.box(4.5,0,4.5,11.5,12,11.5);
+    private static final VoxelShape BOUNDING = Block.box(4.5,0,4.5,11.5,16,11.5);
 
     protected TelescopeBlock(Properties properties) {
         super(properties);

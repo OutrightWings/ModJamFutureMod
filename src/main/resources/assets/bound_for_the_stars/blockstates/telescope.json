@@ -2,18 +2,19 @@
   "variants": {
     "facing=east": {
       "model": "bound_for_the_stars:block/telescope",
-      "y": 90
+      "y": 270
     },
     "facing=north": {
-      "model": "bound_for_the_stars:block/telescope"
-    },
-    "facing=south": {
       "model": "bound_for_the_stars:block/telescope",
       "y": 180
     },
+    "facing=south": {
+      "model": "bound_for_the_stars:block/telescope",
+      "y": 0
+    },
     "facing=west": {
       "model": "bound_for_the_stars:block/telescope",
-      "y": 270
+      "y": 90
     }
   }
 }
