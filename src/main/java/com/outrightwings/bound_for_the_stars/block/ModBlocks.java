@@ -25,7 +25,7 @@ public class ModBlocks {
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_DUST_ROCKY = createBlockWItem("moon_dust_rocky",() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOONSTONE_PILLAR_END = createBlockWItem("moonstone_pillar_end",() -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> LAYERED_MOONSTONE = createBlockWItem("layered_moonstone",() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
-        public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_DUST_PATH = createBlockWItem("moon_dust_path",() -> new DirtPathBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
+        public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_DUST_PATH = createBlockWItem("moon_dust_path",() -> new MoonPathBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> LUNITE_ORE = createBlockWItem("lunite_ore",() -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
 
         //Block sets
