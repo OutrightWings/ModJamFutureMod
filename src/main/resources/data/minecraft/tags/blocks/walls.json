@@ -1,0 +1,13 @@
+{
+   "replace":false,
+  "values": [
+    "bound_for_the_stars:black_cobble_wall",
+    "bound_for_the_stars:black_rock_wall",
+    "bound_for_the_stars:red_cobble_wall",
+    "bound_for_the_stars:red_rock_wall",
+    "bound_for_the_stars:cheese_wall",
+    "bound_for_the_stars:moon_cobble_wall",
+    "bound_for_the_stars:moonstone_wall",
+    "bound_for_the_stars:packed_moon_dust_wall"
+  ]
+}

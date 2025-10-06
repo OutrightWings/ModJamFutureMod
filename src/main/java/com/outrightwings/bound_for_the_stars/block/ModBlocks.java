@@ -27,6 +27,9 @@ public class ModBlocks {
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> LAYERED_MOONSTONE = createBlockWItem("layered_moonstone",() -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_DUST_PATH = createBlockWItem("moon_dust_path",() -> new MoonPathBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> LUNITE_ORE = createBlockWItem("lunite_ore",() -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
+        public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> STRANGE_WALL = createBlockWItem("strange_wall",() -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
+        public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_ROCKS = createBlockWItem("moon_rocks",() -> new PlaceableDecorator(BlockBehaviour.Properties.copy(Blocks.PINK_PETALS)));
+        public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> DUST_LAYER = createBlockWItem("dust_layer",() -> new MoonDustLayer(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
 
         //Block sets
         public static final List<Tuple<RegistryObject<? extends Block>,RegistryObject<BlockItem>>> BLACK_COBBLE = createBaseBlockSet("black_cobble");
@@ -37,8 +40,6 @@ public class ModBlocks {
         public static final List<Tuple<RegistryObject<? extends Block>,RegistryObject<BlockItem>>> MOON_COBBLE = createBaseBlockSet("moon_cobble");
         public static final List<Tuple<RegistryObject<? extends Block>,RegistryObject<BlockItem>>> MOONSTONE = createBaseBlockSet("moonstone");
         public static final List<Tuple<RegistryObject<? extends Block>,RegistryObject<BlockItem>>> PACKED_MOON_DUST = createBaseBlockSet("packed_moon_dust");
-
-
 
         private static List<Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>>> createBaseBlockSet(String name){
                 List<Tuple<RegistryObject<? extends Block>,RegistryObject<BlockItem>>> blockSet = new ArrayList<>();

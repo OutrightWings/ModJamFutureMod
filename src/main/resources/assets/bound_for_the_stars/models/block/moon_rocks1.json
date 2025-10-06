@@ -1,0 +1,54 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "bound_for_the_stars:block/moon_rocks",
+		"particle": "bound_for_the_stars:block/moon_rocks"
+	},
+	"elements": [
+		{
+			"name": "4l",
+			"from": [2, 0, 1],
+			"to": [6, 3, 7],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 0, 1]},
+			"faces": {
+				"north": {"uv": [10, 9.5, 12, 11], "texture": "#0"},
+				"east": {"uv": [8.5, 6.5, 10, 9.5], "rotation": 270, "texture": "#0"},
+				"south": {"uv": [10, 5, 12, 6.5], "rotation": 180, "texture": "#0"},
+				"west": {"uv": [12, 6.5, 13.5, 9.5], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [12, 9.5, 10, 6.5], "texture": "#0"},
+				"down": {"uv": [12, 6.5, 10, 9.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "4s",
+			"from": [1, 0, 3],
+			"to": [2, 2, 7],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 0, 3]},
+			"faces": {
+				"north": {"uv": [13.5, 10, 14, 11], "texture": "#0"},
+				"south": {"uv": [13.5, 7, 14, 8], "rotation": 180, "texture": "#0"},
+				"west": {"uv": [14, 8, 15, 10], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [14, 10, 13.5, 8], "texture": "#0"},
+				"down": {"uv": [14, 8, 13.5, 10], "texture": "#0"}
+			}
+		}
+	],
+	"display": {},
+	"groups": [
+		{
+			"name": "moonRocks",
+			"origin": [10, 0, 9],
+			"color": 0,
+			"children": [
+				{
+					"name": "4",
+					"origin": [10, 0, 9],
+					"color": 0,
+					"children": [0, 1]
+				}
+			]
+		}
+	]
+}

@@ -62,13 +62,10 @@ public class Main
 //TODO grilled cheese
 //TODO eat cheese
 //TODO walls tagged as walls
-//TODO moondust snow slabs
 //TODO moondsut particles check for on block
 //TODO Spaceship not syncing for server! Auto 3rd person
 //TODO Spaceship Item Icon
-//TODO Telscope textures
 //TODO Villager skin
-//TODO moon stone surface decorations
 //TODO moon crater carver (lliw)
 //TODO moon skybox
 //TODO moon structures
