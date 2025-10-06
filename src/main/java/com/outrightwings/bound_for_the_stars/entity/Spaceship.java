@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.outrightwings.bound_for_the_stars.Main;
 import com.outrightwings.bound_for_the_stars.dimension.ModDimensions;
 import com.outrightwings.bound_for_the_stars.item.ModItems;
+import com.outrightwings.bound_for_the_stars.util.Teleport;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -11,6 +12,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -30,6 +32,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.ITeleporter;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -112,8 +118,8 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
 
     private static float turnRate = 3.0f;
     private static float pitchRate = 1.5f;
-    private static float maxPitch = 0f;
-    private static float minPitch = -135f;
+    private static float maxPitch = 135f;
+    private static float minPitch = -0f;
     private static float maxSpeed = 1f;
     private static float ticksToSpeed = 25f;
     private static float ticksToZero = 50f;
@@ -141,13 +147,13 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
     }
     private void spaceMovement(LivingEntity rider){
         // Yaw
-        this.setYRot(this.getYRot() + (-rider.xxa * turnRate));
+        this.setYRot(this.getYRot() - (rider.xxa * turnRate));
         this.yBodyRot = this.getYRot();
         this.yHeadRot = this.getYRot();
 
         // Pitch
         this.shipPitch = Mth.clamp(
-                this.shipPitch - rider.zza * pitchRate,
+                this.shipPitch + rider.zza * pitchRate,
                 minPitch, maxPitch
         );
 
@@ -163,6 +169,10 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         speed = currSpeed * mult;
         setDeltaMovement(up.scale(speed));
         this.move(MoverType.SELF, getDeltaMovement());
+
+        if(!level().noCollision(this,this.getBoundingBox().inflate(0.001))){
+            causeFallDamage(0,0,null);
+        }
     }
     private void nonSpaceMovement(LivingEntity rider){
         double gravity = this.getAttribute(ForgeMod.ENTITY_GRAVITY.get()).getValue();
@@ -193,15 +203,15 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
             if (getY() > 300 && getControllingPassenger() instanceof ServerPlayer player) {
                   ServerLevel target = getServer().getLevel(ModDimensions.MOON);
                 if (target != null) {
-//                    int x = this.getBlockX();
-//                    int z = this.getBlockZ();
-//                    int surfaceY = target.getHeight(Heightmap.Types.WORLD_SURFACE, x, z);
-                    BlockPos spawnSurface = new BlockPos(0, 200, 0);
-                    teleportWithPassenger(player, target, spawnSurface);
+                    int x = this.getBlockX();
+                    int z = this.getBlockZ();
+                    int surfaceY = target.getHeight(Heightmap.Types.WORLD_SURFACE, x, z);
+                    Teleport.teleportPlayerWithShip(player,ModDimensions.MOON, x,200,z);
                 }
             }
         }
-        else{ //Client side
+        else{
+            //Client side
             //Take off particles
             boolean onGround = isEffectivelyOnGround(0.5);
             Vec3 point = getThrusterWorldPos();
@@ -220,42 +230,48 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         }
     }
     private boolean isEffectivelyOnGround(double threshold) {
-        AABB bb = this.getBoundingBox();
-        double minY = bb.minY;
+        if(shipPitch == 0){
+            AABB bb = this.getBoundingBox();
+            double minY = bb.minY;
 
-        int minX = Mth.floor(bb.minX);
-        int maxX = Mth.floor(bb.maxX);
-        int minZ = Mth.floor(bb.minZ);
-        int maxZ = Mth.floor(bb.maxZ);
+            int minX = Mth.floor(bb.minX);
+            int maxX = Mth.floor(bb.maxX);
+            int minZ = Mth.floor(bb.minZ);
+            int maxZ = Mth.floor(bb.maxZ);
 
-        // base block y directly under bounding box
-        int baseY = Mth.floor(minY - 0.001);
+            // base block y directly under bounding box
+            int baseY = Mth.floor(minY - 0.001);
 
-        int steps = Math.max(1, (int) Math.ceil(threshold)); // how many whole-block levels to sample
-        for (int dy = 0; dy <= steps; dy++) {
-            int checkY = baseY - dy;
-            for (int x = minX; x <= maxX; x++) {
-                for (int z = minZ; z <= maxZ; z++) {
-                    BlockPos pos = new BlockPos(x, checkY, z);
-                    BlockState state = level().getBlockState(pos);
+            int steps = Math.max(1, (int) Math.ceil(threshold)); // how many whole-block levels to sample
+            for (int dy = 0; dy <= steps; dy++) {
+                int checkY = baseY - dy;
+                for (int x = minX; x <= maxX; x++) {
+                    for (int z = minZ; z <= maxZ; z++) {
+                        BlockPos pos = new BlockPos(x, checkY, z);
+                        BlockState state = level().getBlockState(pos);
 
-                    // skip air
-                    if (state.isAir()) continue;
+                        // skip air
+                        if (state.isAir()) continue;
 
-                    // approx top-of-block as pos.getY() + 1.0 (good enough for most blocks)
-                    double blockTop = pos.getY() + 1.0;
+                        // approx top-of-block as pos.getY() + 1.0 (good enough for most blocks)
+                        double blockTop = pos.getY() + 1.0;
 
-                    // if the distance from bounding-box bottom to block top is <= threshold -> on ground
-                    if (minY - blockTop <= threshold) {
-                        return true;
+                        // if the distance from bounding-box bottom to block top is <= threshold -> on ground
+                        if (minY - blockTop <= threshold) {
+                            return true;
+                        }
                     }
                 }
             }
         }
         return false;
     }
-    public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource source) {return false;}
-    protected void checkFallDamage(double y, boolean onGroundIn, BlockState state, BlockPos pos) {}
+    public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource source) {
+        this.thrustOn = false;
+        setDeltaMovement(Vec3.ZERO);
+        return false;
+    }
+
     private Vec3 getThrusterWorldPos() {
         Vec3 localOffset = new Vec3(0, -1, 0);
 
@@ -293,32 +309,6 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
                 basePos.y,
                 basePos.z + (random.nextDouble() - 0.5) * spread,
                 0.0, 0.02, 0.0);
-    }
-    private void teleportWithPassenger(ServerPlayer player, ServerLevel target, BlockPos pos) {
-        //TODO make this work lol
-        this.ejectPassengers();
-        Entity newShip = this.changeDimension(target, new ITeleporter() {
-            @Override
-            public Entity placeEntity(Entity entity, ServerLevel current, ServerLevel dest, float yaw, Function<Boolean, Entity> reposition) {
-                Entity e = reposition.apply(true);
-                e.teleportTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-                return e;
-            }
-        });
-        this.discard();
-        Entity newPlayer = player.changeDimension(target, new ITeleporter() {
-            @Override
-            public Entity placeEntity(Entity entity, ServerLevel current, ServerLevel dest, float yaw, Function<Boolean, Entity> reposition) {
-                Entity p = reposition.apply(false);
-                p.teleportTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-
-//                if (newShip != null && !newShip.isRemoved()) {
-//                    p.startRiding(newShip, true);
-//                }
-                return p;
-            }
-        });
-        newPlayer.startRiding(newShip);
     }
 
     private static Vec3 getUpVectorFromPitchYaw(float pitch, float yaw) {

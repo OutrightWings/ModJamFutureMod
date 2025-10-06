@@ -10,7 +10,7 @@ import software.bernie.geckolib.model.GeoModel;
 @OnlyIn(Dist.CLIENT)
 public class SpaceshipGeo extends DefaultedEntityGeoModel<Spaceship> {
     public SpaceshipGeo() {
-        super(new ResourceLocation(Main.MODID,"spaceship"));
+        super(ResourceLocation.fromNamespaceAndPath(Main.MODID,"spaceship"));
     }
 
 }
