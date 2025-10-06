@@ -5,6 +5,7 @@ import com.outrightwings.bound_for_the_stars.block.ModBlocks;
 import com.outrightwings.bound_for_the_stars.entity.ModEntities;
 import com.outrightwings.bound_for_the_stars.entity.ModVillager;
 import com.outrightwings.bound_for_the_stars.item.ModItems;
+import com.outrightwings.bound_for_the_stars.network.ModPackets;
 import com.outrightwings.bound_for_the_stars.particle.ModParticle;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -51,6 +52,9 @@ public class Main
 //        ForgeRegistries.ITEMS.getEntries().stream().filter(o -> o.getValue().getDescriptionId().contains(MODID)).forEach((object ->
 //                LOGGER.debug(object.getValue().asItem().getDescriptionId())
 //        ));
+        event.enqueueWork(()->{
+            ModPackets.register();
+        });
     }
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
@@ -63,10 +67,16 @@ public class Main
 //TODO eat cheese
 //TODO walls tagged as walls
 //TODO moondsut particles check for on block
-//TODO Spaceship not syncing for server! Auto 3rd person
 //TODO Spaceship Item Icon
 //TODO Villager skin
 //TODO moon crater carver (lliw)
 //TODO moon skybox
 //TODO moon structures
 //TODO tardigrade
+
+
+
+
+//Lofty ideas?
+//No gravity blocks in space
+//  Astroids of gravel that dont fall

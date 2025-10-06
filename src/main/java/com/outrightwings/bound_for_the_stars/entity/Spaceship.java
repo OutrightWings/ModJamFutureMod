@@ -4,6 +4,9 @@ import com.google.common.collect.Lists;
 import com.outrightwings.bound_for_the_stars.Main;
 import com.outrightwings.bound_for_the_stars.dimension.ModDimensions;
 import com.outrightwings.bound_for_the_stars.item.ModItems;
+import com.outrightwings.bound_for_the_stars.network.F5Packet;
+import com.outrightwings.bound_for_the_stars.network.FirstPersonPacket;
+import com.outrightwings.bound_for_the_stars.network.ModPackets;
 import com.outrightwings.bound_for_the_stars.util.Teleport;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -38,6 +41,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.ITeleporter;
+import net.minecraftforge.network.PacketDistributor;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -108,6 +112,10 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         if (!this.isVehicle()) {
             player.startRiding(this);
+
+            if (player instanceof ServerPlayer sp) {
+                ModPackets.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp), new F5Packet());
+            }
 
             return super.mobInteract(player, hand);
         }
@@ -380,6 +388,10 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
                     candidates.add(new Vec3(tryX, (double)below.getY() + floorBelow, tryZ));
                 }
             }
+        }
+
+        if (entity instanceof ServerPlayer sp) {
+            ModPackets.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp), new FirstPersonPacket());
         }
 
         for (Pose pose : entity.getDismountPoses()) {
