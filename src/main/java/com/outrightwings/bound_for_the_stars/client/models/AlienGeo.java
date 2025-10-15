@@ -7,6 +7,6 @@ import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 
 public class AlienGeo extends DefaultedEntityGeoModel<Alien> {
     public AlienGeo() {
-        super(ResourceLocation.fromNamespaceAndPath(Main.MODID,"alien"));
+        super(ResourceLocation.fromNamespaceAndPath(Main.MODID,"alien"),true);
     }
 }

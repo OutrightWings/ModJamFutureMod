@@ -1,6 +1,7 @@
 package com.outrightwings.bound_for_the_stars.entity;
 
 import com.outrightwings.bound_for_the_stars.Main;
+import com.outrightwings.bound_for_the_stars.item.ModItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -78,7 +79,7 @@ public class Alien extends PathfinderMob implements GeoEntity {
         this.entityData.set(SKIN_COLOR, this.random.nextInt(3)); // 0–2, three colors
 
         if (this.random.nextFloat() < 0.25f) { // 25% chance for sword
-            this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
+            this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItems.BLASTER.get()));
         }
 
         return data;
