@@ -105,6 +105,12 @@
 					]
 				},
 				{
+					"name": "holdPosL",
+					"parent": "armL",
+					"pivot": [2.25, 3.3, -1.5],
+					"rotation": [0, -5, -10]
+				},
+				{
 					"name": "armR",
 					"parent": "greyBody",
 					"pivot": [-2, 13, 0],
@@ -136,6 +142,12 @@
 							}
 						}
 					]
+				},
+				{
+					"name": "holdPosR",
+					"parent": "armR",
+					"pivot": [-2.25, 3.3, -1.5],
+					"rotation": [0, 5, 10]
 				},
 				{
 					"name": "head",

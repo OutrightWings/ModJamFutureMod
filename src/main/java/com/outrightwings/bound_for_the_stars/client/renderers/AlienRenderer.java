@@ -4,32 +4,29 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.outrightwings.bound_for_the_stars.Main;
-import com.outrightwings.bound_for_the_stars.client.models.AlienGeo;
 import com.outrightwings.bound_for_the_stars.entity.Alien;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
-import org.joml.Matrix4f;
-import software.bernie.example.client.renderer.entity.GremlinRenderer;
-import software.bernie.example.entity.DynamicExampleEntity;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.cache.object.GeoBone;
+import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.layer.BlockAndItemGeoLayer;
 
 import javax.annotation.Nullable;
-
+@OnlyIn(Dist.CLIENT)
 public class AlienRenderer extends GeoEntityRenderer<Alien> {
     protected ItemStack mainHandItem;
     protected ItemStack offhandItem;
-    private static final String LEFT_HAND = "armL";
-    private static final String RIGHT_HAND = "armR";
+    private static final String LEFT_HAND = "holdPosL";
+    private static final String RIGHT_HAND = "holdPosR";
     public AlienRenderer(EntityRendererProvider.Context context) {
         super(context, new AlienGeo());
         addRenderLayer(new BlockAndItemGeoLayer<>(this) {
@@ -115,4 +112,9 @@ public class AlienRenderer extends GeoEntityRenderer<Alien> {
         super.renderRecursively(poseStack,alien,bone,renderType,bufferSource,buffer,isReRender,partialTick,packedLight,packedOverlay,red,green,blue,alpha);
     }
 
+    public static class AlienGeo extends DefaultedEntityGeoModel<Alien> {
+        public AlienGeo() {
+            super(ResourceLocation.fromNamespaceAndPath(Main.MODID,"alien"),true);
+        }
+    }
 }

@@ -2,20 +2,15 @@ package com.outrightwings.bound_for_the_stars.client;
 
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
-import com.outrightwings.bound_for_the_stars.Main;
-import com.outrightwings.bound_for_the_stars.client.models.SpaceshipGeo;
 import com.outrightwings.bound_for_the_stars.client.renderers.AlienRenderer;
+import com.outrightwings.bound_for_the_stars.client.renderers.MoonCowRenderer;
 import com.outrightwings.bound_for_the_stars.client.renderers.SpaceshipRenderer;
+import com.outrightwings.bound_for_the_stars.client.renderers.TinyTardigradeRenderer;
 import com.outrightwings.bound_for_the_stars.entity.ModEntities;
 import com.outrightwings.bound_for_the_stars.entity.Spaceship;
 import com.outrightwings.bound_for_the_stars.particle.FootprintParticle;
 import com.outrightwings.bound_for_the_stars.particle.ModParticle;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleEngine;
-import net.minecraft.client.particle.SpriteSet;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -24,9 +19,6 @@ import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import org.joml.Matrix4f;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 import static com.outrightwings.bound_for_the_stars.Main.MODID;
 
@@ -37,6 +29,8 @@ public class ClientEvents {
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event){
         event.registerEntityRenderer(ModEntities.SPACESHIP_ENTITY.get(), SpaceshipRenderer::new);
         event.registerEntityRenderer(ModEntities.ALIEN_ENTITY.get(), AlienRenderer::new);
+        event.registerEntityRenderer(ModEntities.MOON_COW_ENTITY.get(), MoonCowRenderer::new);
+        event.registerEntityRenderer(ModEntities.TINY_TARDIGRADE_ENTITY.get(), TinyTardigradeRenderer::new);
     }
 
     @SubscribeEvent

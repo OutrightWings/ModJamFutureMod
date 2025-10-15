@@ -3,7 +3,6 @@ package com.outrightwings.bound_for_the_stars.client.renderers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.outrightwings.bound_for_the_stars.Main;
-import com.outrightwings.bound_for_the_stars.client.models.SpaceshipGeo;
 import com.outrightwings.bound_for_the_stars.entity.Spaceship;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -12,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 @OnlyIn(Dist.CLIENT)
@@ -39,6 +39,11 @@ public class SpaceshipRenderer extends GeoEntityRenderer<Spaceship> {
         pose.mulPose(Axis.XP.rotationDegrees(pitch));
 
         pose.translate(0, -pivotY, 0); // translate back after rotation
+    }
+    public static class SpaceshipGeo extends DefaultedEntityGeoModel<Spaceship> {
+        public SpaceshipGeo() {
+            super(ResourceLocation.fromNamespaceAndPath(Main.MODID,"spaceship"));
+        }
     }
 }
 
