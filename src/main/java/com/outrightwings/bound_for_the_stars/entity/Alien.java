@@ -88,7 +88,6 @@ public class Alien extends PathfinderMob implements GeoEntity {
     }
 
     protected void registerGoals() {
-        //this.eatBlockGoal = new EatBlockGoal(this);
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new PanicGoal(this, 1.5F));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0F)); //Walk

@@ -1,166 +1,31 @@
 {
-	"format_version": "1.21.6",
-	"credit": "Made with Blockbench",
-	"textures": {
-		"0": "bound_for_the_stars:item/blaster"
-	},
-	"elements": [
-		{
-			"name": "body",
-			"from": [6.5, 0, 7.5],
-			"to": [9.5, 3, 9.5],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 1.5, 8.5]},
-			"faces": {
-				"north": {"uv": [8, 13, 11, 16], "texture": "#0"},
-				"east": {"uv": [6, 13, 8, 16], "texture": "#0"},
-				"south": {"uv": [13, 13, 16, 16], "texture": "#0"},
-				"west": {"uv": [11, 13, 13, 16], "texture": "#0"},
-				"up": {"uv": [11, 13, 8, 11], "texture": "#0"},
-				"down": {"uv": [16, 11, 13, 13], "texture": "#0"}
-			}
-		},
-		{
-			"name": "handle",
-			"from": [7.5, -2, 7.5],
-			"to": [8.5, 0, 8.5],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, -1, 8]},
-			"faces": {
-				"north": {"uv": [8, 8, 9, 10], "texture": "#0"},
-				"east": {"uv": [7, 8, 8, 10], "texture": "#0"},
-				"south": {"uv": [10, 8, 11, 10], "texture": "#0"},
-				"west": {"uv": [9, 8, 10, 10], "texture": "#0"},
-				"down": {"uv": [11, 7, 10, 8], "texture": "#0"}
-			}
-		},
-		{
-			"name": "barrelEF",
-			"from": [8, 1, 4.5],
-			"to": [8, 2, 5.5],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 1.5, 5]},
-			"faces": {
-				"east": {"uv": [13, 6, 14, 7], "texture": "#0"},
-				"west": {"uv": [13, 6, 14, 7], "texture": "#0"}
-			}
-		},
-		{
-			"name": "barrelEM",
-			"from": [8, 1, 5.5],
-			"to": [8, 2, 6.5],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 1.5, 6]},
-			"faces": {
-				"east": {"uv": [14, 6, 15, 7], "texture": "#0"},
-				"west": {"uv": [14, 6, 15, 7], "texture": "#0"}
-			}
-		},
-		{
-			"name": "barrelEB",
-			"from": [8, 1, 6.5],
-			"to": [8, 2, 7.5],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 1.5, 7]},
-			"faces": {
-				"east": {"uv": [15, 6, 16, 7], "texture": "#0"},
-				"west": {"uv": [15, 6, 16, 7], "texture": "#0"}
-			}
-		},
-		{
-			"name": "ringB",
-			"from": [6.4, -0.1, 6.5],
-			"to": [9.6, 3.1, 6.5],
-			"rotation": {"angle": 45, "axis": "z", "origin": [8, 1.5, 6.5]},
-			"faces": {
-				"north": {"uv": [13, 2, 16, 5], "texture": "#0"},
-				"south": {"uv": [13, 2, 16, 5], "texture": "#0"}
-			}
-		},
-		{
-			"name": "ringF",
-			"from": [6.6, 0.1, 5.5],
-			"to": [9.4, 2.9, 5.5],
-			"rotation": {"angle": 45, "axis": "z", "origin": [8, 1.5, 5.5]},
-			"faces": {
-				"north": {"uv": [9, 2, 12, 5], "texture": "#0"},
-				"south": {"uv": [9, 2, 12, 5], "texture": "#0"}
-			}
-		},
-		{
-			"name": "ball",
-			"from": [7.5, 1, 3.5],
-			"to": [8.5, 2, 4.5],
-			"rotation": {"angle": 45, "axis": "z", "origin": [8, 1.5, 4]},
-			"faces": {
-				"north": {"uv": [13, 9, 14, 10], "texture": "#0"},
-				"east": {"uv": [12, 9, 13, 10], "texture": "#0"},
-				"south": {"uv": [15, 9, 16, 10], "texture": "#0"},
-				"west": {"uv": [14, 9, 15, 10], "texture": "#0"},
-				"up": {"uv": [14, 9, 13, 8], "texture": "#0"},
-				"down": {"uv": [16, 8, 15, 9], "texture": "#0"}
-			}
-		}
-	],
-	"display": {
-		"thirdperson_righthand": {
-			"rotation": [-5, 5, 0],
-			"translation": [0, 8.1, 0]
-		},
-		"thirdperson_lefthand": {
-			"rotation": [-5, 5, 0],
-			"translation": [0, 8.1, 0]
-		},
-		"firstperson_righthand": {
-			"translation": [0, 8.5, 0]
-		},
-		"firstperson_lefthand": {
-			"translation": [0, 8.5, 0]
-		},
-		"ground": {
-			"translation": [0, 6.5, 0]
-		},
-		"gui": {
-			"rotation": [-45, -99, -50],
-			"translation": [-5, 17.5, 0],
-			"scale": [2.5, 2.5, 2.5]
-		},
-		"head": {
-			"translation": [0, 19, -2.25],
-			"scale": [1.5, 1.5, 1.5]
-		},
-		"fixed": {
-			"rotation": [90, 85, -90],
-			"translation": [4.5, 17, 0],
-			"scale": [2.5, 2.5, 2.5]
-		}
-	},
-	"groups": [
-		{
-			"name": "blaster",
-			"origin": [8, 1.5, 8.5],
-			"color": 0,
-			"children": [
-				{
-					"name": "body",
-					"origin": [8, 1.5, 8.5],
-					"color": 0,
-					"children": [0, 1, 2, 3, 4]
-				},
-				{
-					"name": "ringB",
-					"origin": [8, 1.5, 6.5],
-					"color": 0,
-					"children": [5]
-				},
-				{
-					"name": "ringF",
-					"origin": [8, 1.5, 5.5],
-					"color": 0,
-					"children": [6]
-				},
-				{
-					"name": "ball",
-					"origin": [8, 1.5, 4],
-					"color": 0,
-					"children": [7]
-				}
-			]
-		}
-	]
+  "loader": "forge:separate_transforms",
+  "gui_light": "front",
+  "base": {
+    "parent": "bound_for_the_stars:item/blaster_hand",
+    "textures": {
+      "0": "bound_for_the_stars:item/blaster"
+    }
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "item/generated",
+      "textures": {
+        "layer0": "bound_for_the_stars:item/blaster_item"
+      },
+      "gui_light": "front"
+    },
+    "ground": {
+      "parent": "item/generated",
+      "textures": {
+        "layer0": "bound_for_the_stars:item/blaster_item"
+      }
+    },
+    "fixed": {
+      "parent": "item/generated",
+      "textures": {
+        "layer0": "bound_for_the_stars:item/blaster_item"
+      }
+    }
+  }
 }

@@ -3,11 +3,15 @@ package com.outrightwings.bound_for_the_stars.client.renderers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.outrightwings.bound_for_the_stars.Main;
+import com.outrightwings.bound_for_the_stars.entity.Spaceship;
 import com.outrightwings.bound_for_the_stars.item.Blaster;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
@@ -15,6 +19,10 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 public class BlasterProjectileRenderer extends GeoEntityRenderer<Blaster.BlasterProjectile> {
     public BlasterProjectileRenderer(EntityRendererProvider.Context context) {
         super(context, new BlasterProjectileGeo());
+    }
+    @Override
+    public RenderType getRenderType(Blaster.BlasterProjectile animatable, ResourceLocation texture, @Nullable MultiBufferSource bufferSource, float partialTick) {
+        return RenderType.entityTranslucent(texture);
     }
     protected void applyRotations(Blaster.BlasterProjectile animatable, PoseStack poseStack, float ageInTicks, float rotationYaw, float partialTick) {
         poseStack.mulPose(Axis.YP.rotationDegrees(animatable.getYRot()));           // Yaw
