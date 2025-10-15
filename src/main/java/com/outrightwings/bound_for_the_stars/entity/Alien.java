@@ -1,10 +1,14 @@
 package com.outrightwings.bound_for_the_stars.entity;
 
+import com.outrightwings.bound_for_the_stars.Main;
+import com.outrightwings.bound_for_the_stars.entity.goals.BlasterAttackGoal;
+import com.outrightwings.bound_for_the_stars.item.Blaster;
 import com.outrightwings.bound_for_the_stars.item.ModItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -12,11 +16,16 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -28,13 +37,15 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 
-public class Alien extends PathfinderMob implements GeoEntity {
+public class Alien extends PathfinderMob implements GeoEntity, RangedAttackMob {
     private static final EntityDataAccessor<Boolean> HAS_CAPE = SynchedEntityData.defineId(Alien.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> ANTENNAS = SynchedEntityData.defineId(Alien.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> SKIN_COLOR = SynchedEntityData.defineId(Alien.class, EntityDataSerializers.INT);
-
+    private final BlasterAttackGoal<Alien> BLASTER_GOAL = new BlasterAttackGoal<>(this, 1.0F, 20, 15.0F);
+    private final PanicGoal FLEE_GOAL = new PanicGoal(this, 1.5F);
     protected Alien(EntityType<? extends PathfinderMob> type, Level level) {
         super(type, level);
+        reassessWeaponGoal();
     }
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
@@ -67,6 +78,7 @@ public class Alien extends PathfinderMob implements GeoEntity {
         if (tag.contains("color")) {
             this.entityData.set(SKIN_COLOR, tag.getInt("color"));
         }
+        reassessWeaponGoal();
     }
 
     public int antennaCount(){return this.entityData.get(ANTENNAS);}
@@ -83,13 +95,12 @@ public class Alien extends PathfinderMob implements GeoEntity {
         if (this.random.nextFloat() < 0.25f) { // 25% chance for sword
             this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItems.BLASTER.get()));
         }
-
+        reassessWeaponGoal();
         return data;
     }
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new PanicGoal(this, 1.5F));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0F)); //Walk
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.5F)); //Run
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
@@ -97,7 +108,57 @@ public class Alien extends PathfinderMob implements GeoEntity {
         this.goalSelector.addGoal(3,new FollowMobGoal(this,1.25f,2,16));
         this.targetSelector.addGoal(9, new HurtByTargetGoal(this).setAlertOthers());
         this.targetSelector.addGoal(10, new NearestAttackableTargetGoal<>(this, Player.class, true));
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2D, false));
+    }
+    @Override
+    public void performRangedAttack(LivingEntity target, float distanceFactor) {
+        if (this.level().isClientSide) return;
+
+        Blaster.BlasterProjectile proj = Blaster.BlasterProjectile.spawnAtPlayer(this, this.level());
+
+        double dx = target.getX() - this.getX();
+        double dy = target.getEyeY() - proj.getY();
+        double dz = target.getZ() - this.getZ();
+        float speed = 1.25F;
+        float inaccuracy = 0F;
+        proj.shoot(dx, dy, dz, speed, inaccuracy);
+
+        this.level().addFreshEntity(proj);
+
+        this.level().playSound(
+                null,
+                this.getX(),
+                this.getY(),
+                this.getZ(),
+                net.minecraft.sounds.SoundEvents.BLAZE_SHOOT,
+                this.getSoundSource(),
+                1.0F,
+                2F
+        );
+    }
+    public void reassessWeaponGoal() {
+        if (!this.level().isClientSide) {
+            this.goalSelector.removeGoal(this.BLASTER_GOAL);
+            this.goalSelector.removeGoal(this.FLEE_GOAL);
+            if (this.holdingGun()) {
+                int i = 20;
+                if (this.level().getDifficulty() != Difficulty.HARD) {
+                    i = 40;
+                }
+
+                this.BLASTER_GOAL.setMinAttackInterval(i);
+                this.goalSelector.addGoal(4, this.BLASTER_GOAL);
+            } else {
+                this.goalSelector.addGoal(1, this.FLEE_GOAL);
+            }
+        }
+
+    }
+    public void setItemSlot(EquipmentSlot slot, ItemStack stack) {
+        super.setItemSlot(slot, stack);
+        if (!this.level().isClientSide) {
+            this.reassessWeaponGoal();
+        }
+
     }
     private boolean holdingGun(){
         return !this.getMainHandItem().is(Blocks.AIR.asItem());
@@ -110,7 +171,7 @@ public class Alien extends PathfinderMob implements GeoEntity {
     protected static final RawAnimation IDLE_ANIM2 = RawAnimation.begin().thenLoop("alien.idleGun");
     protected static final RawAnimation WALK_ANIM2 = RawAnimation.begin().thenLoop("alien.walkGun");
     protected static final RawAnimation RUN_ANIM2 = RawAnimation.begin().thenLoop("alien.runGun");
-    //protected static final RawAnimation SHOOT_ANIM = RawAnimation.begin().thenLoop("alien.shoot");
+    protected static final RawAnimation SHOOT_ANIM = RawAnimation.begin().thenPlay("alien.shoot");
 
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return geoCache;
@@ -121,13 +182,13 @@ public class Alien extends PathfinderMob implements GeoEntity {
     protected <E extends Alien> PlayState walkAnimController(final AnimationState<E> event){
         if(event.isMoving()){
             if(this.getDeltaMovement().length() > .13f){
-                return event.setAndContinue(holdingGun() ? RUN_ANIM2 : RUN_ANIM);
+                return event.setAndContinue(holdingGun()&&isAggressive() ? RUN_ANIM2 : RUN_ANIM);
             }
             else{
                 event.setControllerSpeed(1.2f);
-                return event.setAndContinue(holdingGun() ? WALK_ANIM2 : WALK_ANIM);
+                return event.setAndContinue(holdingGun()&&isAggressive() ? WALK_ANIM2 : WALK_ANIM);
             }
         }
-        return event.setAndContinue(holdingGun() ? IDLE_ANIM2 : IDLE_ANIM);
+        return event.setAndContinue(holdingGun()&&isAggressive() ? IDLE_ANIM2 : IDLE_ANIM);
     }
 }

@@ -1,6 +1,7 @@
 package com.outrightwings.bound_for_the_stars.item;
 
 import com.outrightwings.bound_for_the_stars.entity.ModEntities;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
@@ -60,7 +61,7 @@ public class Blaster extends Item {
             super(entityType, level);
         }
 
-        public static BlasterProjectile spawnAtPlayer(Player player, Level level) {
+        public static BlasterProjectile spawnAtPlayer(Entity player, Level level) {
             BlasterProjectile projectile = new BlasterProjectile(ModEntities.BLASTER_PROJECTILE.get(), level);
             projectile.setPos(player.getX(), player.getEyeY() - 0.1F, player.getZ());
             projectile.setOwner(player);
