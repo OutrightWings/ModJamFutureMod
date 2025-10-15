@@ -19,29 +19,29 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<Spaceship>> SPACESHIP_ENTITY = ENTITY_TYPES.register("spaceship",()->
             EntityType.Builder.of(Spaceship::new,  MobCategory.MISC)
-                    .sized(1.75f,3.625f) //28px wide 58px tall
+                    .sized(28/16f,58/16f) //28px wide 58px tall
                     .fireImmune()
                     .build(ResourceLocation.fromNamespaceAndPath(MODID, "spaceship").toString())
             );
 
     public static final RegistryObject<EntityType<Alien>> ALIEN_ENTITY = ENTITY_TYPES.register("alien",()->
             EntityType.Builder.of(Alien::new,  MobCategory.CREATURE)
-                    .sized(.5f,1.5f) //8px wide 24px tall
+                    .sized(8/16f,24/16f)
                     .build(ResourceLocation.fromNamespaceAndPath(MODID, "alien").toString())
     );
     public static final RegistryObject<EntityType<MoonCow>> MOON_COW_ENTITY = ENTITY_TYPES.register("moon_cow",()->
             EntityType.Builder.of(MoonCow::new,  MobCategory.CREATURE)
-                    .sized(.5f,1.5f)
+                    .sized(19/16f,25/16f)
                     .build(ResourceLocation.fromNamespaceAndPath(MODID, "moon_cow").toString())
     );
     public static final RegistryObject<EntityType<TinyTardigrade>> TINY_TARDIGRADE_ENTITY = ENTITY_TYPES.register("tiny_tradigrade",()->
             EntityType.Builder.of(TinyTardigrade::new,  MobCategory.CREATURE)
-                    .sized(.5f,1.5f)
+                    .sized(11/16f,5/16f)
                     .build(ResourceLocation.fromNamespaceAndPath(MODID, "tiny_tardigrade").toString())
     );
     public static final RegistryObject<EntityType<Blaster.BlasterProjectile>> BLASTER_PROJECTILE = ENTITY_TYPES.register("blaster_projectile",()->
             EntityType.Builder.of(Blaster.BlasterProjectile::new,  MobCategory.MISC)
-                    .sized(.5f,1.5f)
+                    .sized(4/16f,2/16f)
                     .build(ResourceLocation.fromNamespaceAndPath(MODID, "blaster_projectile").toString())
     );
 
