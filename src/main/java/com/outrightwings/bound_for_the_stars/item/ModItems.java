@@ -18,7 +18,7 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final RegistryObject<Item> SPACESHIP_ITEM = ITEMS.register("spaceship_item", () -> new SpaceshipItem(new Item.Properties()));
     public static final RegistryObject<Item> ALIEN_SPAWN_EGG = ITEMS.register("alien_spawn_egg",()-> new ForgeSpawnEggItem(ModEntities.ALIEN_ENTITY,0x48594d,0x4d4859, new Item.Properties()));
-    public static final RegistryObject<Item> BLASTER = ITEMS.register("blaster", () -> new Item(new Item.Properties().stacksTo(1).durability(128)));
+    public static final RegistryObject<Item> BLASTER = ITEMS.register("blaster", () -> new Blaster(new Item.Properties().stacksTo(1).durability(128)));
     public static final RegistryObject<Item> MOON_COW_SPAWN_EGG = ITEMS.register("moon_cow_spawn_egg",()-> new ForgeSpawnEggItem(ModEntities.MOON_COW_ENTITY,0x61438a,0x310e61, new Item.Properties()));
     public static final RegistryObject<Item> TINY_TARDIGRADE_SPAWN_EGG = ITEMS.register("tiny_tardigrade_spawn_egg",()-> new ForgeSpawnEggItem(ModEntities.TINY_TARDIGRADE_ENTITY,0xd8acf2,0xdcf0a1, new Item.Properties()));
 

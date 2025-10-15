@@ -2,10 +2,7 @@ package com.outrightwings.bound_for_the_stars.client;
 
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
-import com.outrightwings.bound_for_the_stars.client.renderers.AlienRenderer;
-import com.outrightwings.bound_for_the_stars.client.renderers.MoonCowRenderer;
-import com.outrightwings.bound_for_the_stars.client.renderers.SpaceshipRenderer;
-import com.outrightwings.bound_for_the_stars.client.renderers.TinyTardigradeRenderer;
+import com.outrightwings.bound_for_the_stars.client.renderers.*;
 import com.outrightwings.bound_for_the_stars.entity.ModEntities;
 import com.outrightwings.bound_for_the_stars.entity.Spaceship;
 import com.outrightwings.bound_for_the_stars.particle.FootprintParticle;
@@ -31,6 +28,7 @@ public class ClientEvents {
         event.registerEntityRenderer(ModEntities.ALIEN_ENTITY.get(), AlienRenderer::new);
         event.registerEntityRenderer(ModEntities.MOON_COW_ENTITY.get(), MoonCowRenderer::new);
         event.registerEntityRenderer(ModEntities.TINY_TARDIGRADE_ENTITY.get(), TinyTardigradeRenderer::new);
+        event.registerEntityRenderer(ModEntities.BLASTER_PROJECTILE.get(), BlasterProjectileRenderer::new);
     }
 
     @SubscribeEvent

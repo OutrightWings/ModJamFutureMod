@@ -1,6 +1,5 @@
 package com.outrightwings.bound_for_the_stars.entity;
 
-import com.outrightwings.bound_for_the_stars.Main;
 import com.outrightwings.bound_for_the_stars.item.ModItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -11,13 +10,13 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -38,7 +37,10 @@ public class Alien extends PathfinderMob implements GeoEntity {
         super(type, level);
     }
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, (double)10.0F).add(Attributes.MOVEMENT_SPEED, (double)0.23F);
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, (double)10.0F)
+                .add(Attributes.MOVEMENT_SPEED, (double)0.23F)
+                .add(Attributes.ATTACK_DAMAGE,1);
     }
     protected void defineSynchedData() {
         super.defineSynchedData();
@@ -94,8 +96,13 @@ public class Alien extends PathfinderMob implements GeoEntity {
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(3,new FollowMobGoal(this,1.25f,2,16));
+        this.targetSelector.addGoal(9, new HurtByTargetGoal(this).setAlertOthers());
+        this.targetSelector.addGoal(10, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.2D, false));
     }
-
+    private boolean holdingGun(){
+        return !this.getMainHandItem().is(Blocks.AIR.asItem());
+    }
     //Geckolib
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("alien.idle");
@@ -115,13 +122,13 @@ public class Alien extends PathfinderMob implements GeoEntity {
     protected <E extends Alien> PlayState walkAnimController(final AnimationState<E> event){
         if(event.isMoving()){
             if(this.getDeltaMovement().length() > .13f){
-                return event.setAndContinue(RUN_ANIM2);
+                return event.setAndContinue(holdingGun() ? RUN_ANIM2 : RUN_ANIM);
             }
             else{
                 event.setControllerSpeed(1.2f);
-                return event.setAndContinue(WALK_ANIM2);
+                return event.setAndContinue(holdingGun() ? WALK_ANIM2 : WALK_ANIM);
             }
         }
-        return event.setAndContinue(IDLE_ANIM2);
+        return event.setAndContinue(holdingGun() ? IDLE_ANIM2 : IDLE_ANIM);
     }
 }

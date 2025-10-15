@@ -33,17 +33,17 @@ public class MoonCowRenderer extends GeoEntityRenderer<MoonCow> {
     }
     public void renderRecursively(PoseStack poseStack, MoonCow alien, GeoBone bone, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         poseStack.pushPose();
-        if(animatable.isBaby()){
+        if(alien.isBaby()){
             if (bone.getName().equals("head")) {
                 poseStack.scale(2.0f, 2.0f, 2.0f);
                 poseStack.translate(0, -0.5f, .3);
             }
         }
         if(bone.getName().equals("hornsLarge")){
-            bone.setHidden(animatable.isBaby());
+            bone.setHidden(alien.isBaby());
         }
         if(bone.getName().equals("hornsSmall"))
-            bone.setHidden(!animatable.isBaby());
+            bone.setHidden(!alien.isBaby());
 
         super.renderRecursively(poseStack,alien,bone,renderType,bufferSource,buffer,isReRender,partialTick,packedLight,packedOverlay,red,green,blue,alpha);
         poseStack.popPose();
