@@ -67,15 +67,13 @@ public class Main
 //TODO eat cheese
 //TODO walls tagged as walls
 //TODO moondsut particles check for on block
-//TODO Spaceship Item Icon
 //TODO Villager skin
-//TODO moon crater carver (lliw)
 //TODO moon skybox
 //TODO moon structures
-//TODO tardigrade
 
-
-
+//TODO Alien noises
+//TODO Alien walk animation controller
+//TODO why alien not neutral?
 
 //Lofty ideas?
 //No gravity blocks in space

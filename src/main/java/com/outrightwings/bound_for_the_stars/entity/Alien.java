@@ -50,7 +50,7 @@ public class Alien extends PathfinderMob implements GeoEntity, RangedAttackMob {
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, (double)10.0F)
-                .add(Attributes.MOVEMENT_SPEED, (double)0.23F)
+                .add(Attributes.MOVEMENT_SPEED, (double)0.13F)
                 .add(Attributes.ATTACK_DAMAGE,1);
     }
     protected void defineSynchedData() {
@@ -89,10 +89,34 @@ public class Alien extends PathfinderMob implements GeoEntity, RangedAttackMob {
         data = super.finalizeSpawn(level, difficulty, reason, data, tag);
 
         this.entityData.set(HAS_CAPE, this.random.nextFloat() < 0.1f); // 10% chance
-        this.entityData.set(ANTENNAS, this.random.nextInt(4)); // 0–3
-        this.entityData.set(SKIN_COLOR, this.random.nextInt(3)); // 0–2, three colors
 
-        if (this.random.nextFloat() < 0.25f) { // 25% chance for sword
+        int antenna = this.random.nextInt(100);
+        if(antenna < 50){
+            this.entityData.set(ANTENNAS,0); // 0–3
+        }
+        else if(antenna < 75){
+            this.entityData.set(ANTENNAS, 1);
+        }
+        else if(antenna < 90){
+            this.entityData.set(ANTENNAS, 2);
+        }
+        else {
+            this.entityData.set(ANTENNAS, 3);
+        }
+
+
+        int color = this.random.nextInt(100);
+        if(color < 85){
+            this.entityData.set(SKIN_COLOR, 0);
+        }
+        else if(color < 95){
+            this.entityData.set(SKIN_COLOR, 1);
+        }
+        else{
+            this.entityData.set(SKIN_COLOR, 2);
+        }
+
+        if (this.random.nextFloat() < 0.25f) { // 25%
             this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItems.BLASTER.get()));
         }
         reassessWeaponGoal();
@@ -102,7 +126,7 @@ public class Alien extends PathfinderMob implements GeoEntity, RangedAttackMob {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0F)); //Walk
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.5F)); //Run
+        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 3F)); //Run
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(3,new FollowMobGoal(this,1.25f,2,16));
@@ -112,7 +136,7 @@ public class Alien extends PathfinderMob implements GeoEntity, RangedAttackMob {
     @Override
     public void performRangedAttack(LivingEntity target, float distanceFactor) {
         if (this.level().isClientSide) return;
-
+        //triggerAnim("shoot_controller", "shoot");
         Blaster.BlasterProjectile proj = Blaster.BlasterProjectile.spawnAtPlayer(this, this.level());
 
         double dx = target.getX() - this.getX();
@@ -171,21 +195,23 @@ public class Alien extends PathfinderMob implements GeoEntity, RangedAttackMob {
     protected static final RawAnimation IDLE_ANIM2 = RawAnimation.begin().thenLoop("alien.idleGun");
     protected static final RawAnimation WALK_ANIM2 = RawAnimation.begin().thenLoop("alien.walkGun");
     protected static final RawAnimation RUN_ANIM2 = RawAnimation.begin().thenLoop("alien.runGun");
-    protected static final RawAnimation SHOOT_ANIM = RawAnimation.begin().thenPlay("alien.shoot");
+    //protected static final RawAnimation SHOOT_ANIM = RawAnimation.begin().thenPlay("alien.shoot");
 
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return geoCache;
     }
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this,"Idle",3,this::walkAnimController));
+//        controllerRegistrar.add(new AnimationController<>(this, "shoot_controller", state -> PlayState.STOP)
+//                .triggerableAnim("shoot", SHOOT_ANIM));
     }
     protected <E extends Alien> PlayState walkAnimController(final AnimationState<E> event){
-        if(event.isMoving()){
-            if(this.getDeltaMovement().length() > .13f){
+        if(this.getDeltaMovement().length() > .05){
+            if(this.getDeltaMovement().length() > .15f){
                 return event.setAndContinue(holdingGun()&&isAggressive() ? RUN_ANIM2 : RUN_ANIM);
             }
             else{
-                event.setControllerSpeed(1.2f);
+                event.setControllerSpeed(2f);
                 return event.setAndContinue(holdingGun()&&isAggressive() ? WALK_ANIM2 : WALK_ANIM);
             }
         }
