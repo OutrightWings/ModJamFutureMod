@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/slab_top",
+	"textures": {
+		"bottom": "bound_for_the_stars:block/purple_cheese",
+		"top": "bound_for_the_stars:block/purple_cheese",
+		"side": "bound_for_the_stars:block/purple_cheese"
+	}
+}

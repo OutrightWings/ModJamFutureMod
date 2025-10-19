@@ -1,0 +1,14 @@
+
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bound_for_the_stars:block/smooth_moonstone_slab"
+    },
+    "type=double": {
+      "model": "bound_for_the_stars:block/smooth_moonstone"
+    },
+    "type=top": {
+      "model": "bound_for_the_stars:block/smooth_moonstone_slab_top"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_side_tall",
+  "textures": {
+    "wall": "bound_for_the_stars:block/purple_cheese"
+  }
+}

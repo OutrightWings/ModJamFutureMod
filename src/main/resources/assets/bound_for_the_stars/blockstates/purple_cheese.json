@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {"model": "bound_for_the_stars:block/purple_cheese"},
+      {"model": "bound_for_the_stars:block/purple_cheese1"},
+      {"model": "bound_for_the_stars:block/purple_cheese2"}
+    ]
+  }
+}

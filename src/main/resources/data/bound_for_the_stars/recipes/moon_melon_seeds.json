@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "bound_for_the_stars:moon_melon_slice"
+    }
+  ],
+  "result": {
+    "item": "bound_for_the_stars:moon_melon_seeds"
+  }
+}

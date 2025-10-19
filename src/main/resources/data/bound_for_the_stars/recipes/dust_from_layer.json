@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "bound_for_the_stars:dust_layer"
+    },
+    {
+      "item": "bound_for_the_stars:dust_layer"
+    },
+    {
+      "item": "bound_for_the_stars:dust_layer"
+    },
+    {
+      "item": "bound_for_the_stars:dust_layer"
+    },
+    {
+      "item": "bound_for_the_stars:dust_layer"
+    },
+    {
+      "item": "bound_for_the_stars:dust_layer"
+    },
+    {
+      "item": "bound_for_the_stars:dust_layer"
+    },
+    {
+      "item": "bound_for_the_stars:dust_layer"
+    }
+  ],
+  "result": {
+    "item": "bound_for_the_stars:moon_dust"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "bound_for_the_stars:moonstone"
+    }
+  ],
+  "result": {
+    "item": "bound_for_the_stars:moon_rocks"
+  }
+}

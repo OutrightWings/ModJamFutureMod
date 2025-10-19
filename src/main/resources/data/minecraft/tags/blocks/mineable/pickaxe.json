@@ -43,6 +43,15 @@
 
     "bound_for_the_stars:moon_dust_rocky",
     "bound_for_the_stars:layered_moonstone",
-    "bound_for_the_stars:lunite_ore"
+    "bound_for_the_stars:lunite_ore",
+    "bound_for_the_stars:purple_cheese",
+    "bound_for_the_stars:purple_cheese_slab",
+    "bound_for_the_stars:purple_cheese_stairs",
+    "bound_for_the_stars:purple_cheese_wall",
+    "bound_for_the_stars:lunite_block",
+    "bound_for_the_stars:smooth_moonstone",
+"bound_for_the_stars:smooth_moonstone_slab",
+"bound_for_the_stars:smooth_moonstone_stairs",
+"bound_for_the_stars:smooth_moonstone_wall"
   ]
 }

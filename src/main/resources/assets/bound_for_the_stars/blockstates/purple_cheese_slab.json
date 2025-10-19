@@ -1,0 +1,14 @@
+
+{
+  "variants": {
+    "type=bottom": {
+      "model": "bound_for_the_stars:block/purple_cheese_slab"
+    },
+    "type=double": {
+      "model": "bound_for_the_stars:block/purple_cheese"
+    },
+    "type=top": {
+      "model": "bound_for_the_stars:block/purple_cheese_slab_top"
+    }
+  }
+}

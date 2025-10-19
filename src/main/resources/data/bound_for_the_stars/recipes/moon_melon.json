@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "bound_for_the_stars:moon_melon_slice"
+    },
+    {
+      "item": "bound_for_the_stars:moon_melon_slice"
+    },
+    {
+      "item": "bound_for_the_stars:moon_melon_slice"
+    },
+    {
+      "item": "bound_for_the_stars:moon_melon_slice"
+    },
+    {
+      "item": "bound_for_the_stars:moon_melon_slice"
+    },
+    {
+      "item": "bound_for_the_stars:moon_melon_slice"
+    },
+    {
+      "item": "bound_for_the_stars:moon_melon_slice"
+    },
+    {
+      "item": "bound_for_the_stars:moon_melon_slice"
+    },
+    {
+      "item": "bound_for_the_stars:moon_melon_slice"
+    }
+  ],
+  "result": {
+    "item": "bound_for_the_stars:moon_melon"
+  }
+}

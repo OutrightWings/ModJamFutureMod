@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "bound_for_the_stars:block/lunite_block",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "bound_for_the_stars:block/lunite_block",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "bound_for_the_stars:block/lunite_block"
+    },
+    "facing=west": {
+      "model": "bound_for_the_stars:block/lunite_block",
+      "y": 90
+    }
+  }
+}

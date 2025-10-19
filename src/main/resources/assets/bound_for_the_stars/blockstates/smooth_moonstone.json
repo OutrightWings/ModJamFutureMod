@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {"model": "bound_for_the_stars:block/smooth_moonstone"},
+      {"model": "bound_for_the_stars:block/smooth_moonstone1"},
+      {"model": "bound_for_the_stars:block/smooth_moonstone2"}
+    ]
+  }
+}

@@ -7,6 +7,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.level.Level;
@@ -25,7 +26,7 @@ public class MoonDustBlock extends GravelBlock implements MoonDustParticles{
         ItemStack heldItem = player.getItemInHand(hand);
 
         // Only handle server side
-        if (!level.isClientSide && heldItem.getItem() instanceof ShovelItem) {
+        if (!level.isClientSide && heldItem.getItem() instanceof ShovelItem || !level.isClientSide && heldItem.getItem() instanceof HoeItem) {
             BlockState pathState = MOON_DUST_PATH.getA().get().defaultBlockState();
 
             // Check that the block above is air (same condition as vanilla)

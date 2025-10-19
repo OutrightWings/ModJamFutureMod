@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "bound_for_the_stars:block/moon_melon_stem_attached",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "bound_for_the_stars:block/moon_melon_stem_attached",
+      "y": 0
+    },
+    "facing=south": {
+      "model": "bound_for_the_stars:block/moon_melon_stem_attached",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "bound_for_the_stars:block/moon_melon_stem_attached",
+      "y": 270
+    }
+  }
+}

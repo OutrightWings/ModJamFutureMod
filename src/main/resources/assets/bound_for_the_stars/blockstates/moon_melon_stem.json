@@ -1,0 +1,31 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "bound_for_the_stars:block/moon_melon_stem"
+    },
+    "age=1": {
+      "model": "bound_for_the_stars:block/moon_melon_stem"
+    },
+    "age=2": {
+      "model": "bound_for_the_stars:block/moon_melon_stem"
+    },
+    "age=3": {
+      "model": "bound_for_the_stars:block/moon_melon_stem1"
+    },
+    "age=4": {
+      "model": "bound_for_the_stars:block/moon_melon_stem1"
+    },
+    "age=5": {
+      "model": "bound_for_the_stars:block/moon_melon_stem1"
+    },
+    "age=6": {
+      "model": "bound_for_the_stars:block/moon_melon_stem1"
+    },
+    "age=7": [
+      {"model": "bound_for_the_stars:block/moon_melon_stem2", "y" : 0},
+      {"model": "bound_for_the_stars:block/moon_melon_stem2", "y" : 90},
+      {"model": "bound_for_the_stars:block/moon_melon_stem2", "y" : 270},
+      {"model": "bound_for_the_stars:block/moon_melon_stem2", "y" : 180}
+    ]
+  }
+}

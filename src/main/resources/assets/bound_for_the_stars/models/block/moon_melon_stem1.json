@@ -1,0 +1,46 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "bound_for_the_stars:block/moon_melon_stem",
+		"particle": "bound_for_the_stars:block/moon_melon_stem"
+	},
+	"elements": [
+		{
+			"name": "2",
+			"from": [4, 3, 4],
+			"to": [12, 11, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 3, 8]},
+			"faces": {
+				"north": {"uv": [6.5, 8.5, 10.5, 4.5], "rotation": 270, "texture": "#0"},
+				"east": {"uv": [6.5, 0.5, 10.5, 4.5], "rotation": 180, "texture": "#0"},
+				"south": {"uv": [10.5, 4.5, 6.5, 8.5], "rotation": 90, "texture": "#0"},
+				"west": {"uv": [6.5, 0.5, 10.5, 4.5], "texture": "#0"},
+				"up": {"uv": [10.5, 8.5, 6.5, 4.5], "texture": "#0"},
+				"down": {"uv": [6.5, 8.5, 10.5, 4.5], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "2stem",
+			"from": [7, -1, 7],
+			"to": [9, 3, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [4.5, 12.5, 5.5, 14.5], "texture": "#0"},
+				"east": {"uv": [3.5, 12.5, 4.5, 14.5], "texture": "#0"},
+				"south": {"uv": [2.5, 12.5, 3.5, 14.5], "texture": "#0"},
+				"west": {"uv": [1.5, 12.5, 2.5, 14.5], "texture": "#0"},
+				"down": {"uv": [3.5, 14.5, 2.5, 15.5], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "2",
+			"origin": [8, 3, 8],
+			"color": 0,
+			"children": [0, 1]
+		}
+	]
+}

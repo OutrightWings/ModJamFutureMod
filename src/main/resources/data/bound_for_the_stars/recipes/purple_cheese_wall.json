@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "bound_for_the_stars:purple_cheese"
+    }
+  },
+  "result": {
+    "item": "bound_for_the_stars:purple_cheese_wall",
+    "count": 6
+  }
+}

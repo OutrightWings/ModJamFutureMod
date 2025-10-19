@@ -1,6 +1,6 @@
 {
 	"parent": "minecraft:block/template_glazed_terracotta",
 	"textures": {
-		"pattern": "bound_for_the_stars:block/moonstone_terracotta"
+		"pattern": "bound_for_the_stars:block/lunite_block"
 	}
 }

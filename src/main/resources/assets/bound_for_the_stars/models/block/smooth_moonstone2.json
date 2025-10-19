@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:block/cube_all",
+	"textures": {
+		"all": "bound_for_the_stars:block/smooth_moonstone2"
+	}
+}

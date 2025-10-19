@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "bound_for_the_stars:smooth_moonstone_wall"
+    }
+  ],
+  "result": {
+    "item": "bound_for_the_stars:strange_wall"
+  }
+}

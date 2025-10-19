@@ -4,7 +4,7 @@
   "cookingtime": 200,
   "experience": 0.1,
   "ingredient": {
-    "item": "bound_for_the_stars:moonstone"
+    "item": "bound_for_the_stars:smooth_moonstone"
   },
   "result": "bound_for_the_stars:moonstone_terracotta"
 }
