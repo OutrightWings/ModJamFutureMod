@@ -60,6 +60,7 @@
   "block.bound_for_the_stars.telescope":"Telescope",
   "entity.bound_for_the_stars.alien":"Alien",
   "entity.bound_for_the_stars.giant_tardigrade":"Giant Tardigrade",
+  "entity.bound_for_the_stars.ufo":"Alien Ufo",
   "entity.bound_for_the_stars.moon_cow":"Moon Moo",
   "entity.bound_for_the_stars.spaceship":"Spaceship",
   "entity.bound_for_the_stars.tiny_tardigrade":"Tiny Tardigrade",
@@ -71,6 +72,7 @@
   "item.bound_for_the_stars.moon_melon_seeds":"Moon Melon Seeds",
   "item.bound_for_the_stars.moon_melon_slice":"Moon Melon Slice",
   "item.bound_for_the_stars.spaceship_item":"Spaceship",
+  "item.bound_for_the_stars.ufo":"Alien Ufo",
   "item.bound_for_the_stars.tiny_tardigrade_spawn_egg":"Tiny Tardigrade Spawn Egg",
   "itemGroup.bound_for_the_stars": "Bound For The Stars"
 }

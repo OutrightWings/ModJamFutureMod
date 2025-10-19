@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "bound_for_the_stars:item/ufo_item"
+  }
+}

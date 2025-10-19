@@ -29,6 +29,8 @@ public class ClientEvents {
         event.registerEntityRenderer(ModEntities.MOON_COW_ENTITY.get(), MoonCowRenderer::new);
         event.registerEntityRenderer(ModEntities.TINY_TARDIGRADE_ENTITY.get(), TinyTardigradeRenderer::new);
         event.registerEntityRenderer(ModEntities.BLASTER_PROJECTILE.get(), BlasterProjectileRenderer::new);
+        event.registerEntityRenderer(ModEntities.GIANT_TARDIGRADE_ENTITY.get(), GiantTardigradeRenderer::new);
+        event.registerEntityRenderer(ModEntities.UFO_ENTITY.get(), UfoRenderer::new);
     }
 
     @SubscribeEvent

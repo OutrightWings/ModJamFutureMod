@@ -2,8 +2,10 @@ package com.outrightwings.bound_for_the_stars.entity;
 
 import com.outrightwings.bound_for_the_stars.item.Blaster;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -44,12 +46,23 @@ public class ModEntities {
                     .sized(4/16f,2/16f)
                     .build(ResourceLocation.fromNamespaceAndPath(MODID, "blaster_projectile").toString())
     );
-
+    public static final RegistryObject<EntityType<GiantTardigrade>> GIANT_TARDIGRADE_ENTITY = ENTITY_TYPES.register("giant_tardigrade",()->
+            EntityType.Builder.of(GiantTardigrade::new,  MobCategory.CREATURE)
+                    .sized(32/16f,32/16f)
+                    .build(ResourceLocation.fromNamespaceAndPath(MODID, "giant_tardigrade").toString())
+    );
+    public static final RegistryObject<EntityType<Ufo>> UFO_ENTITY = ENTITY_TYPES.register("ufo",()->
+            EntityType.Builder.of(Ufo::new,  MobCategory.MISC)
+                    .sized(24/16f,13/16f)
+                    .build(ResourceLocation.fromNamespaceAndPath(MODID, "ufo").toString())
+    );
     @SubscribeEvent
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.SPACESHIP_ENTITY.get(), Spaceship.createAttributes().build());
         event.put(ModEntities.ALIEN_ENTITY.get(),Alien.createAttributes().build());
         event.put(ModEntities.MOON_COW_ENTITY.get(),MoonCow.createAttributes().build());
         event.put(ModEntities.TINY_TARDIGRADE_ENTITY.get(),TinyTardigrade.createAttributes().build());
+        event.put(ModEntities.GIANT_TARDIGRADE_ENTITY.get(),GiantTardigrade.createAttributes().build());
+        event.put(ModEntities.UFO_ENTITY.get(),Ufo.createAttributes().build());
     }
 }
