@@ -36,7 +36,7 @@ public class ModEntities {
                     .sized(19/16f,25/16f)
                     .build(ResourceLocation.fromNamespaceAndPath(MODID, "moon_cow").toString())
     );
-    public static final RegistryObject<EntityType<TinyTardigrade>> TINY_TARDIGRADE_ENTITY = ENTITY_TYPES.register("tiny_tradigrade",()->
+    public static final RegistryObject<EntityType<TinyTardigrade>> TINY_TARDIGRADE_ENTITY = ENTITY_TYPES.register("tiny_tardigrade",()->
             EntityType.Builder.of(TinyTardigrade::new,  MobCategory.MONSTER)
                     .sized(11/16f,5/16f)
                     .build(ResourceLocation.fromNamespaceAndPath(MODID, "tiny_tardigrade").toString())

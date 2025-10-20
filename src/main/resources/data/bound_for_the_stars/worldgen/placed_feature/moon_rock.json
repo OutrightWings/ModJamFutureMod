@@ -1,19 +1,21 @@
 {
-    "feature": "bound_for_the_stars:moon_rock",
-    "placement" : [
-        {
-            "type" : "count",
-            "count" : 4
-        },
-        {
-            "type": "in_square"
-        },
-        {
-            "type" : "heightmap",
-            "heightmap":"WORLD_SURFACE"
-        },
-        {
-            "type":"biome"
-        }
-    ]
+  "feature": "bound_for_the_stars:moon_rock",
+  "placement": [
+    {
+      "type": "minecraft:noise_threshold_count",
+      "above_noise": 10,
+      "below_noise": 5,
+      "noise_level": -0.8
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING"
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
 }

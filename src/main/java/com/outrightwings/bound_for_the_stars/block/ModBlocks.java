@@ -6,6 +6,8 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -29,7 +31,7 @@ public class ModBlocks {
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_DUST_PATH = createBlockWItem("moon_dust_path",() -> new MoonPathBlock(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> LUNITE_ORE = createBlockWItem("lunite_ore",() -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_ORE)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> STRANGE_WALL = createBlockWItem("strange_wall",() -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
-        public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_ROCKS = createBlockWItem("moon_rocks",() -> new PlaceableDecorator(BlockBehaviour.Properties.copy(Blocks.PINK_PETALS)));
+        public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_ROCKS = createBlockWItem("moon_rocks",() -> new PlaceableDecorator(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).noCollission().sound(SoundType.STONE).pushReaction(PushReaction.DESTROY)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> DUST_LAYER = createBlockWItem("dust_layer",() -> new MoonDustLayer(BlockBehaviour.Properties.copy(Blocks.GRAVEL)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> LUNITE_BLOCK = createBlockWItem("lunite_block",()->new GlazedTerracottaBlock(BlockBehaviour.Properties.copy(Blocks.GLOWSTONE).lightLevel((level) -> 8)));
         public static final Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>> MOON_MELON = createBlockWItem("moon_melon",()->new MoonMelon(BlockBehaviour.Properties.copy(Blocks.MELON)));

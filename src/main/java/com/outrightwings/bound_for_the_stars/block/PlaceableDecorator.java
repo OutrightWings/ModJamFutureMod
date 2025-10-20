@@ -17,6 +17,6 @@ public class PlaceableDecorator extends PinkPetalsBlock {
         return false;
     }
     protected boolean mayPlaceOn(BlockState p_51042_, BlockGetter p_51043_, BlockPos p_51044_) {
-        return true;
+        return !p_51042_.is(Blocks.AIR) && !p_51042_.is(ModBlocks.MOON_ROCKS.getA().get());
     }
 }

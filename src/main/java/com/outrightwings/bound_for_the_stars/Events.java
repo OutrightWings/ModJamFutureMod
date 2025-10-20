@@ -47,7 +47,7 @@ public class Events {
             if(event.getEntity() instanceof Player player){
                 Level level = player.level();
                 if(!level.isClientSide){
-                    if(level.dimension() == ModDimensions.MOON){
+                    if(level.dimension() == ModDimensions.MOON || level.dimension() == ModDimensions.SPACE){
 
                         boolean hasHelmet = player.getItemBySlot(EquipmentSlot.HEAD).getItem() == ModItems.SPACE_HELMET.get();
 

@@ -15,7 +15,7 @@
   },
   "features": [
     ["bound_for_the_stars:moon_crater"],
-    ["bound_for_the_stars:moon_rock"],
+    [],
     ["bound_for_the_stars:ore_lunite","bound_for_the_stars:ore_moon_cobble","bound_for_the_stars:ore_cheese"],
     [],
     []
