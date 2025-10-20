@@ -1,0 +1,19 @@
+{
+    "feature": "bound_for_the_stars:moon_rock",
+    "placement" : [
+        {
+            "type" : "count",
+            "count" : 4
+        },
+        {
+            "type": "in_square"
+        },
+        {
+            "type" : "heightmap",
+            "heightmap":"WORLD_SURFACE"
+        },
+        {
+            "type":"biome"
+        }
+    ]
+}

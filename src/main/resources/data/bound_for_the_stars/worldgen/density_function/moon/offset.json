@@ -1,1 +1,46 @@
-0
+{
+  "argument": {
+    "argument": {
+      "argument1": {
+        "argument1": {
+          "type": "minecraft:blend_offset"
+        },
+        "argument2": {
+          "argument1": 1.0,
+          "argument2": {
+            "argument1": -1.0,
+            "argument2": {
+              "argument": {
+                "type": "minecraft:blend_alpha"
+              },
+              "type": "minecraft:cache_once"
+            },
+            "type": "minecraft:mul"
+          },
+          "type": "minecraft:add"
+        },
+        "type": "minecraft:mul"
+      },
+      "argument2": {
+        "argument1": {
+          "argument1": -0.5037500262260437,
+          "argument2": {
+            "spline": {"coordinate":"bound_for_the_stars:moon/continents","points":[{"location":-1,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/erosion","points":[{"location":-0.8,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/ridges","points":[{"location":-1.4562596109657804,"value":0.3810959990028162,"derivative":0},{"location":-0.6779790679793551,"value":0.3810959990028162,"derivative":0},{"location":-0.3521872127757355,"value":0.7937656822607349,"derivative":0},{"location":0,"value":0.7364504484749128,"derivative":0},{"location":0.3521872127757355,"value":0.7937656822607349,"derivative":0},{"location":0.6779790679793551,"value":0.3810959990028162,"derivative":0},{"location":1.4562596109657804,"value":0.3810959990028162,"derivative":0}]}},{"location":-0.3,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/ridges","points":[{"location":-1.4562596109657804,"value":0.3810959990028162,"derivative":0},{"location":-1.4562596109657804,"value":0.3810959990028162,"derivative":0.03901074079038066},{"location":-0.6779790679793551,"value":0.3810959990028162,"derivative":0},{"location":-0.3521872127757355,"value":0.7937656822607349,"derivative":0},{"location":0,"value":0.7364504484749128,"derivative":0},{"location":0.3521872127757355,"value":0.7937656822607349,"derivative":0},{"location":0.6779790679793551,"value":0.3810959990028162,"derivative":0},{"location":1.4562596109657804,"value":0.3810959990028162,"derivative":-0.03901074079038066},{"location":1.4562596109657804,"value":0.3810959990028162,"derivative":0}]}},{"location":0.3,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/ridges","points":[{"location":-1.4562596109657804,"value":0.3810959990028162,"derivative":0},{"location":-0.6779790679793551,"value":0.3810959990028162,"derivative":0},{"location":-0.3521872127757355,"value":0.7937656822607349,"derivative":0},{"location":0,"value":0.7364504484749128,"derivative":0},{"location":0.3521872127757355,"value":0.7937656822607349,"derivative":0},{"location":0.6779790679793551,"value":0.3810959990028162,"derivative":0},{"location":1.4562596109657804,"value":0.3810959990028162,"derivative":0}]}},{"location":0.8,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/ridges","points":[{"location":-1.4562596109657804,"value":0.3810959990028162,"derivative":0},{"location":-0.6779790679793551,"value":0.3810959990028162,"derivative":0},{"location":-0.3521872127757355,"value":0.7937656822607349,"derivative":0},{"location":0,"value":0.7364504484749128,"derivative":0},{"location":0.3521872127757355,"value":0.7937656822607349,"derivative":0},{"location":0.6779790679793551,"value":0.3810959990028162,"derivative":0},{"location":1.4562596109657804,"value":0.3810959990028162,"derivative":0}]}}]}},{"location":-0.5,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/erosion","points":[{"location":-0.8,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/ridges","points":[{"location":-0.6779790679793551,"value":0.20055292512137057,"derivative":0},{"location":0,"value":0.2922572991786859,"derivative":0},{"location":0.6779790679793551,"value":0.20055292512137057,"derivative":0}]}},{"location":-0.3,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/ridges","points":[{"location":-0.6779790679793551,"value":0.20055292512137057,"derivative":0},{"location":0,"value":0.2922572991786859,"derivative":0},{"location":0.6779790679793551,"value":0.20055292512137057,"derivative":0}]}},{"location":0.3,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/ridges","points":[{"location":-0.6779790679793551,"value":0.20055292512137057,"derivative":0},{"location":0,"value":0.2922572991786859,"derivative":0},{"location":0.6779790679793551,"value":0.20055292512137057,"derivative":0}]}},{"location":0.8,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/ridges","points":[{"location":-0.6779790679793551,"value":0.20055292512137057,"derivative":0},{"location":0,"value":0.2922572991786859,"derivative":0},{"location":0.6779790679793551,"value":0.20055292512137057,"derivative":0}]}}]}},{"location":0.5,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/erosion","points":[{"location":-0.8,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/ridges","points":[{"location":-0.7503772580246042,"value":0.020009938696031238,"derivative":0},{"location":0,"value":0.1031173775098983,"derivative":0},{"location":0.7503772580246042,"value":0.020009938696031238,"derivative":0}]}},{"location":-0.3,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/ridges","points":[{"location":-0.7503772580246042,"value":0.020009938696031238,"derivative":0},{"location":0,"value":0.1031173775098983,"derivative":0},{"location":0.7503772580246042,"value":0.020009938696031238,"derivative":0}]}},{"location":0.3,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/ridges","points":[{"location":-0.7503772580246042,"value":0.020009938696031238,"derivative":0},{"location":0,"value":0.1031173775098983,"derivative":0},{"location":0.7503772580246042,"value":0.020009938696031238,"derivative":0}]}},{"location":0.8,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/ridges","points":[{"location":-0.7503772580246042,"value":0.020009938696031238,"derivative":0},{"location":0,"value":0.1031173775098983,"derivative":0},{"location":0.7503772580246042,"value":0.020009938696031238,"derivative":0}]}}]}},{"location":1,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/erosion","points":[{"location":-0.8,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/ridges","points":[{"location":-0.7503772580246042,"value":0.020009938696031238,"derivative":0},{"location":0,"value":0.1031173775098983,"derivative":0},{"location":0.7503772580246042,"value":0.020009938696031238,"derivative":0}]}},{"location":-0.3,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/ridges","points":[{"location":-0.7503772580246042,"value":0.020009938696031238,"derivative":0},{"location":0,"value":0.1031173775098983,"derivative":0},{"location":0.7503772580246042,"value":0.020009938696031238,"derivative":0}]}},{"location":0.3,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/ridges","points":[{"location":-0.7503772580246042,"value":0.020009938696031238,"derivative":0},{"location":0,"value":0.1031173775098983,"derivative":0},{"location":0.7503772580246042,"value":0.020009938696031238,"derivative":0}]}},{"location":0.8,"derivative":0,"value":{"coordinate":"bound_for_the_stars:moon/ridges","points":[{"location":-0.7503772580246042,"value":0.020009938696031238,"derivative":0},{"location":0,"value":0.1031173775098983,"derivative":0},{"location":0.7503772580246042,"value":0.020009938696031238,"derivative":0}]}}]}}]},
+            "type": "minecraft:spline"
+          },
+          "type": "minecraft:add"
+        },
+        "argument2": {
+          "argument": {
+            "type": "minecraft:blend_alpha"
+          },
+          "type": "minecraft:cache_once"
+        },
+        "type": "minecraft:mul"
+      },
+      "type": "minecraft:add"
+    },
+    "type": "minecraft:cache_2d"
+  },
+  "type": "minecraft:flat_cache"
+}

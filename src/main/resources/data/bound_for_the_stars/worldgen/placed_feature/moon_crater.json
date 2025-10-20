@@ -1,0 +1,24 @@
+{
+    "feature": "bound_for_the_stars:moon_crater",
+    "placement" : [
+        {
+            "type" : "rarity_filter",
+            "chance" : 4
+        },
+        {
+            "type": "in_square"
+        },
+        {
+            "type" : "heightmap",
+            "heightmap":"WORLD_SURFACE_WG"
+        },
+        {
+            "type" : "random_offset",
+            "xz_spread" : 0,
+            "y_spread" : -3
+        },
+        {
+            "type":"biome"
+        }
+    ]
+}

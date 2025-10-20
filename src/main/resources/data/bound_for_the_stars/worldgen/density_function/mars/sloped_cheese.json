@@ -9,10 +9,10 @@
         "type": "minecraft:mul",
         "argument1": {
           "type": "minecraft:add",
-          "argument1": "minecraft:overworld/depth",
+          "argument1": "bound_for_the_stars:mars/depth",
           "argument2": {
             "type": "minecraft:mul",
-            "argument1": "minecraft:overworld/jaggedness",
+            "argument1": "bound_for_the_stars:mars/jaggedness",
             "argument2": {
               "type": "minecraft:half_negative",
               "argument": {
@@ -24,9 +24,9 @@
             }
           }
         },
-        "argument2": "minecraft:overworld/factor"
+        "argument2": "bound_for_the_stars:mars/factor"
       }
     }
   },
-  "argument2": "minecraft:overworld/base_3d_noise"
+  "argument2": "bound_for_the_stars:mars/base_3d_noise"
 }

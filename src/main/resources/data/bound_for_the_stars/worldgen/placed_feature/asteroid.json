@@ -1,0 +1,23 @@
+{
+    "feature": "bound_for_the_stars:asteroid",
+    "placement" : [
+        {
+            "type" : "rarity_filter",
+            "chance" : 10
+        },
+        {
+            "type": "in_square"
+        },
+        {
+            "type" : "height_range",
+            "height":{
+                "type": "uniform",
+                "min_inclusive": {"absolute": 10},
+                "max_inclusive": {"absolute": 374}
+            }
+        },
+        {
+            "type":"biome"
+        }
+    ]
+}

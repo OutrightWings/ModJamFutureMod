@@ -5,16 +5,117 @@
     "biome_source": {
       "biomes": [
         {
-          "biome": "bound_for_the_stars:moon",
           "parameters": {
-            "continentalness": 0.0,
-            "depth": 0.0,
-            "erosion": 0.0,
-            "humidity": 0.0,
-            "offset": 0.0,
-            "temperature": 0.0,
-            "weirdness": 0.0
-          }
+            "weirdness": 0,
+            "continentalness": [
+              0.3,
+              1
+            ],
+            "erosion": [
+              -1,
+              -0.2
+            ],
+            "temperature": 0,
+            "humidity": 0,
+            "depth": 0,
+            "offset": 0
+          },
+          "biome": "bound_for_the_stars:dusty_moon"
+        },
+        {
+          "parameters": {
+            "weirdness": 0,
+            "continentalness": [
+              -1,
+              1
+            ],
+            "erosion": [
+              -0.2,
+              0.2
+            ],
+            "temperature": 0,
+            "humidity": 0,
+            "depth": 0,
+            "offset": 0
+          },
+          "biome": "bound_for_the_stars:moon_barrens"
+        },
+        {
+          "parameters": {
+            "weirdness": 0,
+            "continentalness": [
+             0.3,
+              1
+            ],
+            "erosion": [
+              0.2,
+              1
+            ],
+            "temperature": 0,
+            "humidity": 0,
+            "depth": 0,
+            "offset": 0
+          },
+          "biome": "bound_for_the_stars:moon_outcropping"
+        },
+        {
+          "parameters": {
+            "weirdness": 0,
+            "continentalness": [
+              -0.3,
+              0.3
+            ],
+            "erosion": [
+              -1,
+              1
+            ],
+            "temperature": 0,
+            "humidity": 0,
+            "depth": 0,
+            "offset": 0
+          },
+          "biome": "bound_for_the_stars:moon_barrens"
+        },
+        {
+          "parameters": {
+            "weirdness": 0,
+            "continentalness": [
+              -1,
+              -0.3
+              
+            ],
+            "erosion": [
+              -1,
+              -0.2
+            ],
+            "temperature": 0,
+            "humidity": 0,
+            "depth": 0,
+            "offset": 0
+          },
+          "biome": "bound_for_the_stars:moon_clifs"
+        },
+        {
+          "parameters": {
+            "weirdness": 0,
+            "continentalness": [
+              -1,
+              -0.3
+              
+            ],
+            "erosion": [
+              0.2,
+              1
+            ],
+            "temperature": 0,
+            "humidity": 0,
+            "depth": [
+              -1,
+              1
+            ],
+            "offset": 0
+          },
+          "biome": "bound_for_the_stars:eroded_moon"
         }
       ],
       "type": "minecraft:multi_noise"

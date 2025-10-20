@@ -41,7 +41,6 @@ public class Main
 //TODO grilled cheese
 //TODO eat cheese
 //TODO moondsut particles check for on block
-//TODO Villager skin
 //TODO moon skybox
 //TODO moon structures
 

@@ -18,7 +18,7 @@
       "argument2": {
         "type": "minecraft:mul",
         "argument1": 0.083,
-        "argument2": "bound_for_the_stars:moon/caves/spaghetti_2d_thickness_modulator"
+        "argument2": "bound_for_the_stars:mars/caves/spaghetti_2d_thickness_modulator"
       }
     },
     "argument2": {
@@ -52,7 +52,7 @@
             }
           }
         },
-        "argument2": "bound_for_the_stars:moon/caves/spaghetti_2d_thickness_modulator"
+        "argument2": "bound_for_the_stars:mars/caves/spaghetti_2d_thickness_modulator"
       }
     }
   },
