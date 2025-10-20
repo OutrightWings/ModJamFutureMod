@@ -18,13 +18,9 @@ public class BlasterAttackGoal<T extends Mob & RangedAttackMob> extends Goal {
     private final float attackRadiusSqr;
     private int attackTime;
     private int seeTime;
-    private boolean strafingClockwise;
-    private boolean strafingBackwards;
-    private int strafingTime;
 
     public BlasterAttackGoal(T mob, double speed, int interval, float radius) {
         this.attackTime = -1;
-        this.strafingTime = -1;
         this.mob = mob;
         this.speedModifier = speed;
         this.attackIntervalMin = interval;

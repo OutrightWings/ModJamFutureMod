@@ -36,7 +36,7 @@ public class TinyTardigrade extends PathfinderMob implements GeoEntity {
         super(entityType, level);
     }
     public static AttributeSupplier.Builder createAttributes() {
-        return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, (double)0.2F).add(Attributes.MAX_HEALTH, (double)10);
+        return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, (double)0.2F).add(Attributes.MAX_HEALTH, (double)5);
     }
     protected void defineSynchedData() {
         super.defineSynchedData();
