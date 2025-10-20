@@ -8,15 +8,20 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.TimeUtil;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.BowItem;
@@ -36,21 +41,30 @@ import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
+import java.util.List;
+import java.util.UUID;
 
 public class Alien extends PathfinderMob implements GeoEntity, RangedAttackMob {
     private static final EntityDataAccessor<Boolean> HAS_CAPE = SynchedEntityData.defineId(Alien.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> ANTENNAS = SynchedEntityData.defineId(Alien.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Integer> SKIN_COLOR = SynchedEntityData.defineId(Alien.class, EntityDataSerializers.INT);
     private final BlasterAttackGoal<Alien> BLASTER_GOAL = new BlasterAttackGoal<>(this, 1.0F, 20, 15.0F);
-    private final PanicGoal FLEE_GOAL = new PanicGoal(this, 1.5F);
-    protected Alien(EntityType<? extends PathfinderMob> type, Level level) {
+    private final AvoidEntityGoal<Player> FLEE_GOAL = new AvoidEntityGoal<>(this, Player.class, 16.0F, 2, 2);
+
+    private boolean isAngry = false;
+    private boolean isFlee = false;
+    private int angerTime = 0;
+    private static final int ANGER_DURATION = 200; // 10 seconds (20 ticks/sec)
+
+
+    protected Alien(EntityType<? extends Alien> type, Level level) {
         super(type, level);
         reassessWeaponGoal();
     }
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, (double)10.0F)
-                .add(Attributes.MOVEMENT_SPEED, (double)0.13F)
+                .add(Attributes.MOVEMENT_SPEED, (double)0.16F)
                 .add(Attributes.ATTACK_DAMAGE,1);
     }
     protected void defineSynchedData() {
@@ -126,17 +140,77 @@ public class Alien extends PathfinderMob implements GeoEntity, RangedAttackMob {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0F)); //Walk
-        this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 3F)); //Run
-        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
-        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(3,new FollowMobGoal(this,1.25f,2,16));
-        this.targetSelector.addGoal(9, new HurtByTargetGoal(this).setAlertOthers());
-        this.targetSelector.addGoal(10, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.75)); //Run
+        this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(10,new FollowMobGoal(this,1.25f,3,16));
+        this.targetSelector.addGoal(5, (new HurtByTargetGoal(this)).setAlertOthers());
+        this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::isAngry));
     }
+
+    public boolean isAngry(LivingEntity entity) {
+        return isAngry;
+    }
+    public boolean isFlee(LivingEntity entity) {
+        return isFlee;
+    }
+
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+        boolean result = super.hurt(source, amount);
+        if (!this.level().isClientSide && source.getEntity() instanceof Player) {
+            this.becomeAngryAt(source.getEntity());
+        }
+        return result;
+    }
+    private void fleeFrom(LivingEntity target) {
+        this.goalSelector.addGoal(1,FLEE_GOAL);
+    }
+    private void becomeAngryAt(Entity target) {
+
+        List<? extends Alien> nearby = this.level().getEntitiesOfClass(
+                this.getClass(),
+                this.getBoundingBox().inflate(16.0D)
+        );
+
+        for (Alien mob : nearby) {
+            if (mob.holdingGun()) {
+                mob.isAngry = true;
+                mob.angerTime = ANGER_DURATION;
+                mob.setTarget((LivingEntity) target);
+            } else {
+                mob.isFlee = true;
+                mob.angerTime = ANGER_DURATION;
+                mob.fleeFrom((LivingEntity) target);
+            }
+        }
+    }
+    @Override
+    public void aiStep() {
+        super.aiStep();
+
+        if (this.isAngry||this.isFlee) {
+            // If still has a target, refresh timer
+            if (this.getTarget() != null && this.getTarget().isAlive()) {
+                this.angerTime = ANGER_DURATION;
+            } else {
+                // Countdown
+                if (this.angerTime > 0) {
+                    this.angerTime--;
+                } else {
+                    // Time's up, calm down
+                    this.isAngry = false;
+                    this.isFlee = false;
+                    this.goalSelector.removeGoal(this.FLEE_GOAL);
+                    this.setTarget(null);
+                }
+            }
+        }
+    }
+
     @Override
     public void performRangedAttack(LivingEntity target, float distanceFactor) {
         if (this.level().isClientSide) return;
-        //triggerAnim("shoot_controller", "shoot");
         Blaster.BlasterProjectile proj = Blaster.BlasterProjectile.spawnAtPlayer(this, this.level());
 
         double dx = target.getX() - this.getX();
@@ -170,9 +244,9 @@ public class Alien extends PathfinderMob implements GeoEntity, RangedAttackMob {
                 }
 
                 this.BLASTER_GOAL.setMinAttackInterval(i);
-                this.goalSelector.addGoal(4, this.BLASTER_GOAL);
+                this.goalSelector.addGoal(1, this.BLASTER_GOAL);
             } else {
-                this.goalSelector.addGoal(1, this.FLEE_GOAL);
+                //this.goalSelector.addGoal(1, this.FLEE_GOAL);
             }
         }
 
@@ -195,19 +269,16 @@ public class Alien extends PathfinderMob implements GeoEntity, RangedAttackMob {
     protected static final RawAnimation IDLE_ANIM2 = RawAnimation.begin().thenLoop("alien.idleGun");
     protected static final RawAnimation WALK_ANIM2 = RawAnimation.begin().thenLoop("alien.walkGun");
     protected static final RawAnimation RUN_ANIM2 = RawAnimation.begin().thenLoop("alien.runGun");
-    //protected static final RawAnimation SHOOT_ANIM = RawAnimation.begin().thenPlay("alien.shoot");
 
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return geoCache;
     }
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this,"Idle",3,this::walkAnimController));
-//        controllerRegistrar.add(new AnimationController<>(this, "shoot_controller", state -> PlayState.STOP)
-//                .triggerableAnim("shoot", SHOOT_ANIM));
     }
     protected <E extends Alien> PlayState walkAnimController(final AnimationState<E> event){
-        if(this.getDeltaMovement().length() > .05){
-            if(this.getDeltaMovement().length() > .15f){
+        if(event.isMoving()){
+            if(this.getDeltaMovement().length() > .10f){
                 return event.setAndContinue(holdingGun()&&isAggressive() ? RUN_ANIM2 : RUN_ANIM);
             }
             else{
