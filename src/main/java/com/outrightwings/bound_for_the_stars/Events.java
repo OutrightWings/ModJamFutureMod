@@ -1,12 +1,18 @@
 package com.outrightwings.bound_for_the_stars;
 
 import com.outrightwings.bound_for_the_stars.dimension.ModDimensions;
+import com.outrightwings.bound_for_the_stars.entity.ModEntities;
+import com.outrightwings.bound_for_the_stars.entity.Spawning;
 import com.outrightwings.bound_for_the_stars.item.ModItems;
 import com.outrightwings.bound_for_the_stars.network.ModPackets;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingBreatheEvent;
@@ -26,8 +32,10 @@ public class Events {
     {
         event.enqueueWork(()->{
             ModPackets.register();
+            Spawning.registerSpawnPlacements();
         });
     }
+
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
     public static class ForgeEvents{

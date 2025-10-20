@@ -146,7 +146,7 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         LivingEntity rider = getControllingPassenger();
         if (rider == null) return;
 
-        if(level().dimension().equals(ModDimensions.MOON)){
+        if(level().dimension().equals(ModDimensions.SPACE) ){
             spaceMovement(rider);
         }
         else {
@@ -208,15 +208,7 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
     public void tick(){
         super.tick();
         if(!level().isClientSide){ //server side
-            if (getY() > 300 && getControllingPassenger() instanceof ServerPlayer player) {
-                  ServerLevel target = getServer().getLevel(ModDimensions.MOON);
-                if (target != null) {
-                    int x = this.getBlockX();
-                    int z = this.getBlockZ();
-                    int surfaceY = target.getHeight(Heightmap.Types.WORLD_SURFACE, x, z);
-                    Teleport.teleportPlayerWithShip(player,ModDimensions.MOON, x,200,z);
-                }
-            }
+            Teleport.dimensionCheck(this);
         }
         else{
             //Client side

@@ -1,10 +1,15 @@
 package com.outrightwings.bound_for_the_stars.entity;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -23,6 +28,10 @@ public class MoonCow extends Cow implements GeoEntity {
     @Nullable
     public MoonCow getBreedOffspring(ServerLevel level, AgeableMob mob) {
         return ModEntities.MOON_COW_ENTITY.get().create(level);
+    }
+    public static boolean checkMobSpawnRules(EntityType<? extends Mob> type, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos pos, RandomSource randomSource) {
+        BlockPos blockpos = pos.below();
+        return mobSpawnType == MobSpawnType.SPAWNER || levelAccessor.getBlockState(blockpos).isValidSpawn(levelAccessor, blockpos, type);
     }
     //Geckolib
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
