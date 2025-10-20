@@ -1,7 +1,10 @@
 package com.outrightwings.bound_for_the_stars.entity;
 
 import com.outrightwings.bound_for_the_stars.entity.goals.SpawnAttackGoal;
+import com.outrightwings.bound_for_the_stars.sound.ModSounds;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -20,6 +23,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.AnimatableManager;
@@ -47,6 +51,16 @@ public class GiantTardigrade  extends PathfinderMob implements GeoEntity, Ranged
     @Override
     public void performRangedAttack(LivingEntity livingEntity, float v) {
         triggerAnim("attack", "attack");
+        level().playSound(
+                null,
+                this.getX(),
+                this.getY(),
+                this.getZ(),
+                ModSounds.GIANT_TARDIGRADE_SPAWN.get(),
+                this.getSoundSource(),
+                1.0F, // volume
+                1F  // pitch
+        );
         int radius = 4;
         BlockPos center = this.getOnPos();
         // Try up to 10 random positions to find a valid air spot
@@ -103,5 +117,18 @@ public class GiantTardigrade  extends PathfinderMob implements GeoEntity, Ranged
         return event.setAndContinue(IDLE_ANIM);
     }
 
+    @Override
+    protected @Nullable SoundEvent getHurtSound(DamageSource p_21239_) {
+        return ModSounds.GIANT_TARDIGRADE_HURT.get();
+    }
 
+    @Override
+    protected @Nullable SoundEvent getDeathSound() {
+        return ModSounds.TARDIGRADE_DIE.get();
+    }
+
+    @Override
+    protected @Nullable SoundEvent getAmbientSound() {
+        return ModSounds.GIANT_TARDIGRADE_IDLE.get();
+    }
 }

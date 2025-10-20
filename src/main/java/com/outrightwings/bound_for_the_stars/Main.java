@@ -7,6 +7,7 @@ import com.outrightwings.bound_for_the_stars.entity.ModVillager;
 import com.outrightwings.bound_for_the_stars.item.ModItems;
 import com.outrightwings.bound_for_the_stars.network.ModPackets;
 import com.outrightwings.bound_for_the_stars.particle.ModParticle;
+import com.outrightwings.bound_for_the_stars.sound.ModSounds;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -32,7 +33,7 @@ public class Main
         ModVillager.POI.register(modEventBus);
         ModVillager.PROFESSION.register(modEventBus);
         ModParticle.PARTICLE_TYPES.register(modEventBus);
-
+        ModSounds.SOUNDS.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
 
     }
@@ -44,7 +45,11 @@ public class Main
 //TODO moon skybox
 //TODO moon structures
 
-//TODO Alien noises
+//TODO Mob Spawning
+//TODO Mod page
+//TODO spaceship earth->space->moon
+//TODO gravity
+//Todo add trades
 
 //Lofty ideas?
 //No gravity blocks in space

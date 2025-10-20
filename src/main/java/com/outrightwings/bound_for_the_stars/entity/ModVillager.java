@@ -53,8 +53,9 @@ public class ModVillager {
             List<VillagerTrades.ItemListing> level3 = new ArrayList<>();
             List<VillagerTrades.ItemListing> level4 = new ArrayList<>();
             List<VillagerTrades.ItemListing> level5 = new ArrayList<>();
-            //Todo add trades
+
             level1.add(new BasicItemListing(25, ModItems.SPACESHIP_ITEM.get().getDefaultInstance(),5,5));
+            level1.add(new BasicItemListing(25, ModItems.SPACE_HELMET.get().getDefaultInstance(),5,5));
 
             event.getTrades().put(1, level1);
             event.getTrades().put(2, level2);

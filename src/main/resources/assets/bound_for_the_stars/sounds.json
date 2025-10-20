@@ -1,0 +1,53 @@
+{
+    "tardigrade_die": {
+    "sounds": [
+      "bound_for_the_stars:tardigrade_die"
+    ],
+    "subtitle": "subtitles.bound_for_the_stars.tardigrade_die"
+  },
+
+  "tiny_tardigrade_attack": {
+    "sounds": [
+      "bound_for_the_stars:tiny_tardigrade_attack"
+    ],
+    "subtitle": "subtitles.bound_for_the_stars.tiny_tardigrade_attack"
+  },
+  "tiny_tardigrade_idle": {
+    "sounds": [
+      "bound_for_the_stars:tiny_tardigrade_idle"
+    ],
+    "subtitle": "subtitles.bound_for_the_stars.tiny_tardigrade_idle"
+  },
+  "tiny_tardigrade_hurt": {
+    "sounds": [
+      "bound_for_the_stars:tiny_tardigrade_hurt"
+    ],
+    "subtitle": "subtitles.bound_for_the_stars.tiny_tardigrade_hurt"
+  },
+
+  "giant_tardigrade_spawn": {
+    "sounds": [
+      "bound_for_the_stars:giant_tardigrade_spawn"
+    ],
+    "subtitle": "subtitles.bound_for_the_stars.giant_tardigrade_spawn"
+  },
+  "giant_tardigrade_idle": {
+    "sounds": [
+      "bound_for_the_stars:giant_tardigrade_idle"
+    ],
+    "subtitle": "subtitles.bound_for_the_stars.giant_tardigrade_idle"
+  },
+  "giant_tardigrade_hurt": {
+    "sounds": [
+      "bound_for_the_stars:giant_tardigrade_hurt"
+    ],
+    "subtitle": "subtitles.bound_for_the_stars.giant_tardigrade_hurt"
+  },
+
+  "blaster_pew": {
+    "sounds": [
+      "bound_for_the_stars:blaster_pew"
+    ],
+    "subtitle": "subtitles.bound_for_the_stars.blaster_pew"
+  }
+}

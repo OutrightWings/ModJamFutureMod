@@ -1,10 +1,13 @@
 package com.outrightwings.bound_for_the_stars.entity;
 
+import com.outrightwings.bound_for_the_stars.sound.ModSounds;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -93,8 +96,20 @@ public class TinyTardigrade extends PathfinderMob implements GeoEntity {
     }
     public boolean doHurtTarget(Entity entity){
         triggerAnim("attack", "attack");
+        level().playSound(
+                null,
+                this.getX(),
+                this.getY(),
+                this.getZ(),
+                ModSounds.TINY_TARDIGRADE_ATTACK.get(),
+                this.getSoundSource(),
+                1.0F, // volume
+                1F  // pitch
+        );
         return super.doHurtTarget(entity);
     }
+
+
     //Geckolib
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
     protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("tiny_tardigrade.idle");
@@ -115,5 +130,20 @@ public class TinyTardigrade extends PathfinderMob implements GeoEntity {
             return event.setAndContinue(WALK_ANIM);
         }
         return event.setAndContinue(IDLE_ANIM);
+    }
+
+    @Override
+    protected @org.jetbrains.annotations.Nullable SoundEvent getHurtSound(DamageSource p_21239_) {
+        return ModSounds.TINY_TARDIGRADE_HURT.get();
+    }
+
+    @Override
+    protected @org.jetbrains.annotations.Nullable SoundEvent getDeathSound() {
+        return ModSounds.TARDIGRADE_DIE.get();
+    }
+
+    @Override
+    protected @org.jetbrains.annotations.Nullable SoundEvent getAmbientSound() {
+        return ModSounds.TINY_TARDIGRADE_IDLE.get();
     }
 }

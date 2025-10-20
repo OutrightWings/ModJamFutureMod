@@ -37,7 +37,7 @@ public class ModEntities {
                     .build(ResourceLocation.fromNamespaceAndPath(MODID, "moon_cow").toString())
     );
     public static final RegistryObject<EntityType<TinyTardigrade>> TINY_TARDIGRADE_ENTITY = ENTITY_TYPES.register("tiny_tradigrade",()->
-            EntityType.Builder.of(TinyTardigrade::new,  MobCategory.CREATURE)
+            EntityType.Builder.of(TinyTardigrade::new,  MobCategory.MONSTER)
                     .sized(11/16f,5/16f)
                     .build(ResourceLocation.fromNamespaceAndPath(MODID, "tiny_tardigrade").toString())
     );
@@ -47,7 +47,7 @@ public class ModEntities {
                     .build(ResourceLocation.fromNamespaceAndPath(MODID, "blaster_projectile").toString())
     );
     public static final RegistryObject<EntityType<GiantTardigrade>> GIANT_TARDIGRADE_ENTITY = ENTITY_TYPES.register("giant_tardigrade",()->
-            EntityType.Builder.of(GiantTardigrade::new,  MobCategory.CREATURE)
+            EntityType.Builder.of(GiantTardigrade::new,  MobCategory.MONSTER)
                     .sized(32/16f,32/16f)
                     .build(ResourceLocation.fromNamespaceAndPath(MODID, "giant_tardigrade").toString())
     );

@@ -1,6 +1,7 @@
 package com.outrightwings.bound_for_the_stars.item;
 
 import com.outrightwings.bound_for_the_stars.entity.ModEntities;
+import com.outrightwings.bound_for_the_stars.sound.ModSounds;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -43,10 +44,10 @@ public class Blaster extends Item {
                         player.getX(),
                         player.getY(),
                         player.getZ(),
-                        net.minecraft.sounds.SoundEvents.BLAZE_SHOOT,
+                        ModSounds.BLASTER_PEW.get(),
                         player.getSoundSource(),
                         1.0F, // volume
-                        2F  // pitch
+                        1F  // pitch
                 );
             }
             return InteractionResultHolder.success(player.getItemInHand(hand));
