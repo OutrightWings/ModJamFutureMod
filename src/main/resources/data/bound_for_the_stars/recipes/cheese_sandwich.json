@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "C",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bread"
+    },
+    "C": {
+      "item": "bound_for_the_stars:cheese_item"
+    }
+  },
+  "result": {
+    "item": "bound_for_the_stars:cheese_sandwich",
+    "count": 1
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#bound_for_the_stars:moon_biomes",
+  "spawners": {
+    "type": "bound_for_the_stars:alien",
+    "weight": 20,
+    "minCount": 2,
+    "maxCount": 4
+  }
+}

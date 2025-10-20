@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "": [
+      {"model": "bound_for_the_stars:block/cheese_cauldron"},
+      {"model": "bound_for_the_stars:block/cheese_cauldron1"},
+      {"model": "bound_for_the_stars:block/cheese_cauldron2"}
+    ]
+  }
+}

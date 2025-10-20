@@ -38,19 +38,11 @@ public class Main
 
     }
 }
-//TODO milk cauldron to cheese
-//TODO grilled cheese
-//TODO eat cheese
 //TODO moondsut particles check for on block
-//TODO moon skybox
 //TODO moon structures
 
 //TODO Mob Spawning
 //TODO Mod page
-//TODO spaceship earth->space->moon
 //TODO gravity
-//Todo add trades
 
-//Lofty ideas?
-//No gravity blocks in space
-//  Astroids of gravel that dont fall
+//TODO BUG SPACESHIP TELEPORTING

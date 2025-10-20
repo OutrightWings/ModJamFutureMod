@@ -7,6 +7,7 @@
     }
   ],
   "result": {
-    "item": "bound_for_the_stars:moon_rocks"
+    "item": "bound_for_the_stars:moon_rocks",
+    "count":4
   }
 }

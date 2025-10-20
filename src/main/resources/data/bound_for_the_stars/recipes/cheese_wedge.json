@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "bound_for_the_stars:cheese"
+    }
+  ],
+  "result": {
+    "item": "bound_for_the_stars:cheese_item",
+    "count": 4
+  }
+}

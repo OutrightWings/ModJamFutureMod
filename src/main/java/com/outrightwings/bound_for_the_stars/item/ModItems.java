@@ -33,6 +33,8 @@ public class ModItems {
     public static final RegistryObject<Item> GIANT_TARDIGRADE_SPAWN_EGG = ITEMS.register("giant_tardigrade_spawn_egg",()-> new ForgeSpawnEggItem(ModEntities.GIANT_TARDIGRADE_ENTITY,0xc542f5,0xff96e7, new Item.Properties()));
     public static final RegistryObject<Item> UFO_ITEM = ITEMS.register("ufo_item", () -> new VehicleItem(new Item.Properties()){ public EntityType<? extends Animal> getEntity(){return ModEntities.UFO_ENTITY.get();}});
     public static final RegistryObject<Item> SPACE_HELMET = ITEMS.register("space_helmet",()-> new SpaceHelmet(ArmorMaterials.IRON, ArmorItem.Type.HELMET,new Item.Properties().stacksTo(1).durability(256).fireResistant()));
+    public static final RegistryObject<Item> CHEESE = ITEMS.register("cheese_item", () -> new Item(new Item.Properties().food(Foods.APPLE)));
+    public static final RegistryObject<Item> CHEESE_SANDWICH = ITEMS.register("cheese_sandwich", () -> new Item(new Item.Properties().food(Foods.COOKED_BEEF)));
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
     public static final RegistryObject<CreativeModeTab> MOD_TAB = CREATIVE_TABS.register(MODID, () -> CreativeModeTab.builder()

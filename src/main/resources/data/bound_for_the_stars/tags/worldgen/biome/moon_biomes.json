@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "bound_for_the_stars:dusty_moon",
+    "bound_for_the_stars:eroded_moon",
+    "bound_for_the_stars:moon_barrens",
+    "bound_for_the_stars:moon_cliffs",
+    "bound_for_the_stars:moon_outcropping"
+  ]
+}

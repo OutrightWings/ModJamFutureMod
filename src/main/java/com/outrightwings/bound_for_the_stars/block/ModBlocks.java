@@ -48,6 +48,9 @@ public class ModBlocks {
         //Block
         public static final RegistryObject<? extends Block> MOON_MELON_STEM_ATTACHED = BLOCKS.register("moon_melon_stem_attached",()-> new MoonMelonPlantAttached((StemGrownBlock)MOON_MELON.getA().get(), ModItems.MOON_MELON_SEEDS, BlockBehaviour.Properties.copy(Blocks.ATTACHED_MELON_STEM)));
         public static final RegistryObject<? extends Block> MOON_MELON_STEM = BLOCKS.register("moon_melon_stem",()-> new MoonMelonPlantAttached.MoonMelonPlant((StemGrownBlock)MOON_MELON.getA().get(), ModItems.MOON_MELON_SEEDS,BlockBehaviour.Properties.copy(Blocks.MELON_STEM) ));
+        public static final RegistryObject<? extends Block> CHEESE_CAULDRON = BLOCKS.register("cheese_cauldron",()-> new CheeseCauldron(BlockBehaviour.Properties.copy(Blocks.CAULDRON)));
+        public static final RegistryObject<? extends Block> MILK_CAULDRON = BLOCKS.register("milk_cauldron",()-> new CheeseCauldron.MilkCauldron(BlockBehaviour.Properties.copy(Blocks.CAULDRON)));
+
 
         private static List<Tuple<RegistryObject<? extends Block>, RegistryObject<BlockItem>>> createBaseBlockSet(String name){
                 List<Tuple<RegistryObject<? extends Block>,RegistryObject<BlockItem>>> blockSet = new ArrayList<>();

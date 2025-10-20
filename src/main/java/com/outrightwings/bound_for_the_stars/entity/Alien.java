@@ -4,6 +4,7 @@ import com.outrightwings.bound_for_the_stars.Main;
 import com.outrightwings.bound_for_the_stars.entity.goals.BlasterAttackGoal;
 import com.outrightwings.bound_for_the_stars.item.Blaster;
 import com.outrightwings.bound_for_the_stars.item.ModItems;
+import com.outrightwings.bound_for_the_stars.sound.ModSounds;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -212,7 +213,16 @@ public class Alien extends PathfinderMob implements GeoEntity, RangedAttackMob {
     public void performRangedAttack(LivingEntity target, float distanceFactor) {
         if (this.level().isClientSide) return;
         Blaster.BlasterProjectile proj = Blaster.BlasterProjectile.spawnAtPlayer(this, this.level());
-
+        level().playSound(
+                null,
+                this.getX(),
+                this.getY(),
+                this.getZ(),
+                ModSounds.BLASTER_PEW.get(),
+                this.getSoundSource(),
+                1.0F, // volume
+                1F  // pitch
+        );
         double dx = target.getX() - this.getX();
         double dy = target.getEyeY() - proj.getY();
         double dz = target.getZ() - this.getZ();
