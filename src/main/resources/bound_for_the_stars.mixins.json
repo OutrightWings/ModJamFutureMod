@@ -2,10 +2,12 @@
   "required": true,
   "package": "com.outrightwings.bound_for_the_stars.mixin",
   "compatibilityLevel": "JAVA_17",
-  "refmap": "truly_custom_horse_tack.refmap.json",
+  "refmap": "bound_for_the_stars.refmap.json",
   "mixins": [
+
   ],
   "client": [
+    "skyMixin"
   ],
   "minVersion": "0.8"
 }
