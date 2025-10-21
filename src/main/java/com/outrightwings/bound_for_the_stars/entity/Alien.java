@@ -5,10 +5,12 @@ import com.outrightwings.bound_for_the_stars.entity.goals.BlasterAttackGoal;
 import com.outrightwings.bound_for_the_stars.item.Blaster;
 import com.outrightwings.bound_for_the_stars.item.ModItems;
 import com.outrightwings.bound_for_the_stars.sound.ModSounds;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.TimeUtil;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.Difficulty;
@@ -29,6 +31,7 @@ import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
@@ -61,6 +64,9 @@ public class Alien extends PathfinderMob implements GeoEntity, RangedAttackMob {
     protected Alien(EntityType<? extends Alien> type, Level level) {
         super(type, level);
         reassessWeaponGoal();
+    }
+    public static boolean checkMobSpawnRules(EntityType<? extends Mob> mob, LevelAccessor levelAccessor, MobSpawnType type, BlockPos pos, RandomSource rand) {
+        return !levelAccessor.getBlockState(pos.below()).isAir() && Mob.checkMobSpawnRules(mob,levelAccessor,type,pos,rand);
     }
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()

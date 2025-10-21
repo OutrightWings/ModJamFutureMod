@@ -1,11 +1,13 @@
 package com.outrightwings.bound_for_the_stars.entity;
 
 import com.outrightwings.bound_for_the_stars.sound.ModSounds;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -21,6 +23,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -41,6 +44,11 @@ public class TinyTardigrade extends PathfinderMob implements GeoEntity {
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes().add(Attributes.MOVEMENT_SPEED, (double)0.2F).add(Attributes.MAX_HEALTH, (double)5);
     }
+
+    public static boolean checkMobSpawnRules(EntityType<? extends Mob> mob, LevelAccessor levelAccessor, MobSpawnType type, BlockPos pos, RandomSource rand) {
+        return !levelAccessor.getBlockState(pos.below()).isAir() && Mob.checkMobSpawnRules(mob,levelAccessor,type,pos,rand);
+    }
+
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(SKIN_COLOR, 0);

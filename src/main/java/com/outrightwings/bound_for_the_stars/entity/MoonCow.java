@@ -49,9 +49,8 @@ public class MoonCow extends Cow implements GeoEntity {
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
     }
-    public static boolean checkMobSpawnRules(EntityType<? extends Mob> type, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos pos, RandomSource randomSource) {
-        BlockPos blockpos = pos.below();
-        return mobSpawnType == MobSpawnType.SPAWNER || levelAccessor.getBlockState(blockpos).isValidSpawn(levelAccessor, blockpos, type);
+    public static boolean checkMobSpawnRules(EntityType<? extends Mob> mob, LevelAccessor levelAccessor, MobSpawnType type, BlockPos pos, RandomSource rand) {
+        return !levelAccessor.getBlockState(pos.below()).isAir() && Mob.checkMobSpawnRules(mob,levelAccessor,type,pos,rand);
     }
     //Geckolib
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
