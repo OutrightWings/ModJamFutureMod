@@ -17,7 +17,7 @@
     ["bound_for_the_stars:moon_crater"],
     ["bound_for_the_stars:moon_rock"],
     ["bound_for_the_stars:ore_lunite","bound_for_the_stars:ore_moon_cobble","bound_for_the_stars:ore_cheese"],
-    [],
+    ["bound_for_the_stars:patch_moon_melon"],
     []
   ],
   "has_precipitation": false,
@@ -25,20 +25,20 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [],
-    "misc": [],
-    "monster": [{
-      "type": "bound_for_the_stars:tiny_tardigrade",
-      "maxCount": 6,
-      "minCount": 6,
-      "weight": 100
-      },
+    "creature": [{
+      "type": "bound_for_the_stars:alien",
+      "maxCount": 4,
+      "minCount": 4,
+      "weight": 12
+    },
       {
-        "type": "bound_for_the_stars:giant_tardigrade",
-        "maxCount": 1,
-        "minCount": 1,
-        "weight": 15
+        "type": "bound_for_the_stars:moon_cow",
+        "maxCount": 4,
+        "minCount": 4,
+        "weight": 10
       }],
+    "misc": [],
+    "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []

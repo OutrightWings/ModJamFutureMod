@@ -14,8 +14,8 @@
     "water_fog_color": 329011
   },
   "features": [
-    ["bound_for_the_stars:moon_crater"],
-    ["bound_for_the_stars:moon_rock","bound_for_the_stars:large_moon_rock"],
+    [],
+    [],
     ["bound_for_the_stars:ore_lunite","bound_for_the_stars:ore_moon_cobble","bound_for_the_stars:ore_cheese"],
     [],
     []
@@ -25,20 +25,20 @@
   "spawners": {
     "ambient": [],
     "axolotls": [],
-    "creature": [{
-      "type": "bound_for_the_stars:alien",
-      "maxCount": 4,
-      "minCount": 4,
-      "weight": 12
-    },
-    {
-      "type": "bound_for_the_stars:moon_cow",
-      "maxCount": 4,
-      "minCount": 4,
-      "weight": 10
-    }],
+    "creature": [],
     "misc": [],
-    "monster": [],
+    "monster": [{
+      "type": "bound_for_the_stars:tiny_tardigrade",
+      "maxCount": 6,
+      "minCount": 6,
+      "weight": 100
+      },
+      {
+        "type": "bound_for_the_stars:giant_tardigrade",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 15
+      }],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []
