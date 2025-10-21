@@ -35,14 +35,9 @@ public class Main
         ModParticle.PARTICLE_TYPES.register(modEventBus);
         ModSounds.SOUNDS.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
-
     }
 }
 //TODO moondsut particles check for on block
 //TODO moon structures
-
-//TODO Mob Spawning
-//TODO Mod page
 //TODO gravity
-
 //TODO BUG SPACESHIP TELEPORTING
