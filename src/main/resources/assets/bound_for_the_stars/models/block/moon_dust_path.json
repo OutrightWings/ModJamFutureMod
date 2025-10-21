@@ -1,4 +1,5 @@
 {   "parent": "block/block",
+"ambientocclusion": false,
 	"textures": {
 		"particle": "bound_for_the_stars:block/moon_dust_path",
 		"top": "bound_for_the_stars:block/moon_dust_path",
