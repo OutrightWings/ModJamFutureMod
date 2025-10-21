@@ -8,7 +8,6 @@ import com.outrightwings.bound_for_the_stars.network.F5Packet;
 import com.outrightwings.bound_for_the_stars.network.FirstPersonPacket;
 import com.outrightwings.bound_for_the_stars.network.ModPackets;
 import com.outrightwings.bound_for_the_stars.util.Teleport;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -69,6 +68,7 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
     private static final EntityDataAccessor<Float> CURR_SPEED_DATA = SynchedEntityData.defineId(Spaceship.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Long> CURR_TICKS_SPEED_DATA = SynchedEntityData.defineId(Spaceship.class, EntityDataSerializers.LONG);
     private static final EntityDataAccessor<Boolean> TAKE_OFF_DATA = SynchedEntityData.defineId(Spaceship.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> THRUST_ON_DATA = SynchedEntityData.defineId(Spaceship.class, EntityDataSerializers.BOOLEAN);
     @Override
     public void defineSynchedData() {
         super.defineSynchedData();
@@ -76,22 +76,25 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         this.entityData.define(CURR_SPEED_DATA,0f);
         this.entityData.define(CURR_TICKS_SPEED_DATA,0L);
         this.entityData.define(TAKE_OFF_DATA,true);
+        this.entityData.define(THRUST_ON_DATA,false);
     }
     @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
-        shipPitch = tag.getFloat("pitch");
-        currSpeed = tag.getFloat("curr_speed");
-        currTicksSpeed = tag.getLong("curr_ticks_speed");
-        takeOff = tag.getBoolean("take_off");
+        this.entityData.set(PITCH_DATA,tag.getFloat("pitch"));
+        this.entityData.set(CURR_SPEED_DATA,tag.getFloat("curr_speed"));
+        this.entityData.set(CURR_TICKS_SPEED_DATA,tag.getLong("curr_ticks_speed"));
+        this.entityData.set(TAKE_OFF_DATA,tag.getBoolean("take_off"));
+        this.entityData.set(THRUST_ON_DATA,tag.getBoolean("thrust_on"));
     }
     @Override
     public void addAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
-        tag.putFloat("pitch",shipPitch);
-        tag.putFloat("curr_speed",currSpeed);
-        tag.putFloat("curr_ticks_speed",currTicksSpeed);
-        tag.putBoolean("take_off",takeOff);
+        tag.putFloat("pitch",this.entityData.get(PITCH_DATA));
+        tag.putFloat("curr_speed",this.entityData.get(CURR_SPEED_DATA));
+        tag.putFloat("curr_ticks_speed",this.entityData.get(CURR_TICKS_SPEED_DATA));
+        tag.putBoolean("take_off",this.entityData.get(TAKE_OFF_DATA));
+        tag.putBoolean("thrust_on",this.entityData.get(THRUST_ON_DATA));
     }
 
     //Collide
@@ -132,12 +135,7 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
     private static float ticksToSpeed = 25f;
     private static float ticksToZero = 50f;
 
-    private float currSpeed = 0f;
-    private long currTicksSpeed = 0;
-    private boolean takeOff = true;
-    private boolean thrustOn = false;
     private boolean playerJumping;
-    private float shipPitch = 0;
 
     @Override
     public void travel(Vec3 ignored) {
@@ -160,21 +158,21 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         this.yHeadRot = this.getYRot();
 
         // Pitch
-        this.shipPitch = Mth.clamp(
-                this.shipPitch + rider.zza * pitchRate,
+        this.entityData.set(PITCH_DATA,Mth.clamp(
+                this.entityData.get(PITCH_DATA) + rider.zza * pitchRate,
                 minPitch, maxPitch
-        );
+        ) );
 
         // move
-        Vec3 up = getUpVectorFromPitchYaw(shipPitch, getYRot());
+        Vec3 up = getUpVectorFromPitchYaw(this.entityData.get(PITCH_DATA), getYRot());
         float speed, mult;
-        long time = Minecraft.getInstance().level.getGameTime();
-        if (thrustOn) {
-            mult = Mth.clamp((time - currTicksSpeed) / ticksToSpeed,0,1);
+        long time = level().getGameTime();
+        if (this.entityData.get(THRUST_ON_DATA)) {
+            mult = Mth.clamp((time - this.entityData.get(CURR_TICKS_SPEED_DATA)) / ticksToSpeed,0,1);
         } else {
-            mult = 1f-Mth.clamp((time - currTicksSpeed) / ticksToZero,0,1);
+            mult = 1f-Mth.clamp((time - this.entityData.get(CURR_TICKS_SPEED_DATA)) / ticksToZero,0,1);
         }
-        speed = currSpeed * mult;
+        speed = this.entityData.get(CURR_SPEED_DATA) * mult;
         setDeltaMovement(up.scale(speed));
         this.move(MoverType.SELF, getDeltaMovement());
 
@@ -185,17 +183,17 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
     private void nonSpaceMovement(LivingEntity rider){
         double gravity = this.getAttribute(ForgeMod.ENTITY_GRAVITY.get()).getValue();
         // move
-        Vec3 up = getUpVectorFromPitchYaw(shipPitch, getYRot());
+        Vec3 up = getUpVectorFromPitchYaw(this.entityData.get(PITCH_DATA), getYRot());
         float speed, mult;
-        long time = Minecraft.getInstance().level.getGameTime();
-        if (thrustOn) {
-            mult = Mth.clamp((time - currTicksSpeed) / ticksToSpeed,0,1);
+        long time = level().getGameTime();
+        if (this.entityData.get(THRUST_ON_DATA)) {
+            mult = Mth.clamp((time - this.entityData.get(CURR_TICKS_SPEED_DATA)) / ticksToSpeed,0,1);
         } else {
-            mult = 1f-Mth.clamp((time - currTicksSpeed) / ticksToZero,0,1);
+            mult = 1f-Mth.clamp((time - this.entityData.get(CURR_TICKS_SPEED_DATA)) / ticksToZero,0,1);
         }
-        speed = currSpeed * mult;
+        speed = this.entityData.get(CURR_SPEED_DATA) * mult;
         Vec3 motion;
-        if(thrustOn){
+        if(this.entityData.get(THRUST_ON_DATA)){
             motion =  up.scale(speed);
         }
         else {
@@ -205,32 +203,27 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         setDeltaMovement(motion);
         this.move(MoverType.SELF, getDeltaMovement());
     }
-    public void tick(){
+    @Override
+    public void tick() {
         super.tick();
-        if(!level().isClientSide){ //server side
-            Teleport.dimensionCheck(this);
-        }
-        else{
-            //Client side
-            //Take off particles
-            boolean onGround = isEffectivelyOnGround(0.5);
-            Vec3 point = getThrusterWorldPos();
-            if(!onGround && !takeOff){ //Have just left the ground
-                takeOff = true;
-                spawnTakeoffBurst(point);
-            }
-            if(onGround){ //Back on the ground
-                takeOff = false;
-            }
+        boolean onGround = isEffectivelyOnGround(0.5);
+        Vec3 point = getThrusterWorldPos();
 
-            //Movement particles
-            if(thrustOn && getDeltaMovement().lengthSqr() > 0.1){
+        if (!level().isClientSide) {
+            Teleport.dimensionCheck(this);
+        } else {
+            if (!onGround && this.entityData.get(TAKE_OFF_DATA)) {
+                spawnTakeoffBurst(point);
+                this.entityData.set(TAKE_OFF_DATA, false);
+            }
+            if (this.entityData.get(THRUST_ON_DATA) && getDeltaMovement().lengthSqr() > 0.1) {
                 spawnTrailSmoke(point);
             }
         }
     }
+
     private boolean isEffectivelyOnGround(double threshold) {
-        if(shipPitch == 0){
+        if(this.entityData.get(PITCH_DATA) == 0){
             AABB bb = this.getBoundingBox();
             double minY = bb.minY;
 
@@ -267,7 +260,7 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         return false;
     }
     public boolean causeFallDamage(float fallDistance, float damageMultiplier, DamageSource source) {
-        this.thrustOn = false;
+        this.entityData.set(THRUST_ON_DATA,false);
         setDeltaMovement(Vec3.ZERO);
         return false;
     }
@@ -321,10 +314,11 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         return new Vec3(x, y, z);
     }
     public void onPlayerJump(int jumpPower) {
-        this.thrustOn = !this.thrustOn;
-        currTicksSpeed = Minecraft.getInstance().level.getGameTime();
-        if(thrustOn){
-            currSpeed = maxSpeed * (jumpPower/100f);
+        this.entityData.set(THRUST_ON_DATA,!this.entityData.get(THRUST_ON_DATA));
+        this.entityData.set(CURR_TICKS_SPEED_DATA,level().getGameTime());
+
+        if(this.entityData.get(THRUST_ON_DATA)){
+            this.entityData.set(CURR_SPEED_DATA,maxSpeed * (jumpPower/100f));
         }
     }
     public boolean canJump() {
@@ -337,12 +331,16 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         this.playerJumping = false;
     }
     public float getShipPitch() {
-        return shipPitch;
+        return this.entityData.get(PITCH_DATA);
     }
     public LivingEntity getControllingPassenger() {
         return getFirstPassenger() instanceof LivingEntity entity ? entity : null;
     }
-    public boolean isControlledByLocalInstance() { return true; }
+    @Override
+    public boolean isControlledByLocalInstance() {
+        return this.getControllingPassenger() instanceof Player player && player.isLocalPlayer();
+    }
+
     public double getPassengersRidingOffset() {
         return 1.25f;
     }
