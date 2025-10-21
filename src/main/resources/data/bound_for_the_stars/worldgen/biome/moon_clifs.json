@@ -27,7 +27,18 @@
     "axolotls": [],
     "creature": [],
     "misc": [],
-    "monster": [],
+    "monster": [{
+      "type": "bound_for_the_stars:tiny_tardigrade",
+      "maxCount": 6,
+      "minCount": 6,
+      "weight": 100
+      },
+      {
+        "type": "bound_for_the_stars:giant_tardigrade",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 15
+      }],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []
