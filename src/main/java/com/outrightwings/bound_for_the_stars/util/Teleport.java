@@ -21,6 +21,7 @@ import java.awt.*;
 import java.util.function.Function;
 
 public class Teleport {
+    //TODO THIS IS REALLY BUGGY
     public static void teleportPlayerWithShip(ServerPlayer player, ResourceKey<Level> targetDim, double x, double y, double z) {
         if (player.level().isClientSide) return;
         MinecraftServer server = player.getServer();
@@ -47,8 +48,6 @@ public class Teleport {
                 newShip.moveTo(x, y, z, vehicle.getYRot(), vehicle.getXRot());
                 destination.addFreshEntity(newShip);
                 vehicle.discard();
-
-                // Delay mounting to ensure player fully exists in target world
                 destination.getServer().execute(() -> player.startRiding(newShip, true));
             }
         }
@@ -122,7 +121,7 @@ public class Teleport {
         @Override
         public Entity placeEntity(Entity entity, ServerLevel currentWorld, ServerLevel destinationWorld,
                                   float yaw, Function<Boolean, Entity> repositionEntity) {
-            Entity newEntity = repositionEntity.apply(false);
+            Entity newEntity = repositionEntity.apply(true);
             newEntity.moveTo(pos.x, pos.y, pos.z, yaw, entity.getXRot());
             return newEntity;
         }

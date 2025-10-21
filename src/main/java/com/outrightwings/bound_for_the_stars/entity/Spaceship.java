@@ -139,7 +139,10 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
 
     @Override
     public void travel(Vec3 ignored) {
-        if (!this.isAlive() || !this.isVehicle()) return;
+        if (!this.isAlive() || !this.isVehicle()){
+            if(!level().dimension().equals(ModDimensions.SPACE))
+                fallMovement();
+        }
 
         LivingEntity rider = getControllingPassenger();
         if (rider == null) return;
@@ -198,8 +201,14 @@ public class Spaceship extends Animal implements GeoEntity, PlayerRideableJumpin
         }
         else {
             //TODO make this nicer feeling. Maybe the player must orient the ship nose up to land? or the ship breaks?
-            motion = this.getDeltaMovement().add((double)0.0F, -gravity / (double)4.0F, (double)0.0F);
+            motion = this.getDeltaMovement().add((double)0.0F, -gravity /2f, (double)0.0F);
         }
+        setDeltaMovement(motion);
+        this.move(MoverType.SELF, getDeltaMovement());
+    }
+    private void fallMovement(){
+        double gravity = this.getAttribute(ForgeMod.ENTITY_GRAVITY.get()).getValue();
+        Vec3 motion = this.getDeltaMovement().add((double)0.0F, -gravity / (double)4.0F, (double)0.0F);
         setDeltaMovement(motion);
         this.move(MoverType.SELF, getDeltaMovement());
     }

@@ -2,6 +2,8 @@ package com.outrightwings.bound_for_the_stars.item;
 
 import com.outrightwings.bound_for_the_stars.client.renderers.SpaceHelmetRenderer;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +24,11 @@ import java.util.function.Consumer;
 public class SpaceHelmet  extends ArmorItem implements GeoItem {
     public SpaceHelmet(ArmorMaterial material, Type type, Properties properties) {
         super(material, type, properties);
+    }
+
+    @Override
+    public void onArmorTick(ItemStack stack, Level level, Player player) {
+        player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION,15*20,0,false,false));
     }
 
     //Geckolib
